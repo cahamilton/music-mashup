@@ -4,7 +4,8 @@
   "description": "Music Mashup - Your tasteful resource for music knowledge!",
   "author": "Carl Hamilton <info@carlhamilton.co.uk>",
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "lint": "eslint ."
   },
   "main": "app.js",
   "repository": {
@@ -26,6 +27,10 @@
     "express": "~4.13.1",
     "morgan": "~1.6.1",
     "serve-favicon": "~2.3.0"
+  },
+  "devDependencies": {
+    "eslint": "^1.10.3",
+    "eslint-config-google": "^0.3.0"
   },
   "private": true,
   "license": "MIT"
