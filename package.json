@@ -1,0 +1,32 @@
+{
+  "name": "music-mashup",
+  "version": "2.0.0",
+  "description": "Music Mashup - Your tasteful resource for music knowledge!",
+  "author": "Carl Hamilton <info@carlhamilton.co.uk>",
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cahamilton/music-mashup"
+  },
+  "bugs": {
+    "url": "https://github.com/cahamilton/music-mashup/issues"
+  },
+  "keywords": [
+    "music",
+    "mashup"
+  ],
+  "dependencies": {
+    "body-parser": "~1.13.2",
+    "cookie-parser": "~1.3.5",
+    "debug": "~2.2.0",
+    "ejs": "~2.3.3",
+    "express": "~4.13.1",
+    "morgan": "~1.6.1",
+    "serve-favicon": "~2.3.0"
+  },
+  "private": true,
+  "license": "MIT"
+}
