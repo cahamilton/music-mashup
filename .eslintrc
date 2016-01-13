@@ -1,3 +1,8 @@
 {
-  "extends": "google"
+  "extends": "google",
+  "globals": {
+    "describe": false,
+    "it": false
+  },
+  "rules": {}
 }
