@@ -3,7 +3,7 @@ var router = express.Router();
 
 router.get('/', function(req, res, next) {
   res.render('index', {
-    title: 'Music Mashup'
+    title: 'MusicMashup - Your tasteful resource for music knowledge!'
   });
 });
 
