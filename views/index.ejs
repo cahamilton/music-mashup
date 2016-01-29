@@ -1,6 +1,6 @@
 <!doctype html>
-<!--[if lt IE 9]>      <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 lt-ie9"> <![endif]-->
-<!--[if IE 9]>         <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 ie9"> <![endif]-->
+<!--[if lt IE 9]>      <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]>         <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 ie9"><![endif]-->
 <!--[if gt IE 9]><!--> <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
@@ -16,11 +16,13 @@
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 </head>
 
-<body>
+<body ng-controller="searchArtistCtrl">
 
   <div class="container">
 
     <% include partials/header.ejs %>
+
+    <% include partials/main.ejs %>
 
   </div>
 

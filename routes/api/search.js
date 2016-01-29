@@ -13,14 +13,14 @@ var search = {};
  * @param {String} artistName - Artist to search for
  * @param {Function} callback - Callback function to pass to handlers
  */
-search.artist = function(artistName, callback) {
+search.artist = (artistName, callback) => {
   lastfm.request('artist.search', {
     artist: artistName,
     handlers: {
-      success: function(results) {
+      success: results => {
         search.artist.successHandler(results, callback);
       },
-      error: function(error) {
+      error: error => {
         search.artist.errorHandler(error, callback);
       }
     }
@@ -33,7 +33,7 @@ search.artist = function(artistName, callback) {
  * @param {Function} callback - Callback function
  * @return {Object} results - Newly formatted results object
  */
-search.artist.successHandler = function(data, callback) {
+search.artist.successHandler = (data, callback) => {
   var searchQuery = data.results['opensearch:Query'].searchTerms;
   var searchMatches = data.results.artistmatches.artist;
 
@@ -41,7 +41,7 @@ search.artist.successHandler = function(data, callback) {
   results.query = searchQuery;
   results.matches = [];
 
-  searchMatches.forEach(function(match) {
+  searchMatches.forEach(match => {
     // Sieve out bad artist data and only return results that contain a
     // valid MusicBrainz ID
     if (match.mbid) {
@@ -60,7 +60,7 @@ search.artist.successHandler = function(data, callback) {
  * @param {Function} callback - Callback function
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = function(error, callback) {
+search.artist.errorHandler = (error, callback) => {
   callback(error);
   return error;
 };
@@ -70,7 +70,7 @@ search.artist.errorHandler = function(error, callback) {
  * @param {Object} data - Object of artist data returned from LastFM API call
  * @return {Object} artist - Newly formatted object of artist data
  */
-search.artist.formatData = function(data) {
+search.artist.formatData = data => {
   var artist = {};
   artist.name = data.name;
   artist.mbid = data.mbid;

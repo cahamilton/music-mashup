@@ -8,40 +8,23 @@
          alt="Music Mashup logo"/>
   </div>
 
-  <div class="site-header__search" ng-controller="searchArtistCtrl">
-    <form class="site-header__search-form" ng-submit="searchArtist()">
-      <label for="query">Search for an Artist:</label>
-      <input type="text" id="query" autocomplete="off" autofocus="true"
-             ng-model="searchQuery">
+  <div class="site-header__search">
+    <form class="site-header__search-form" name="search"
+          ng-submit="searchArtist()">
+      <input class="site-header__search-input" type="text" name="query"
+             id="query" autocomplete="off" autofocus="true"
+             placeholder="Search for an Artist..." ng-model="searchQuery"
+             required>
       <input class="site-header__search-button" type="submit" value="Go">
     </form>
 
-    <div class="site-header__results" ng-show="results.length > 0">
-      <span>Not what you were looking for?</span>
-      <button ng-click="moreResults = ! moreResults">Did you mean...</button>
-      <ol class="site-header__results-list" ng-show="moreResults">
-        <li class="site-header__results-list-item"
-            ng-repeat="result in results" ng-hide="$first">
-          <img class="site-header__results-image"
-               ng-if="result.thumbnail['1x']"
-               ng-src="{{result.thumbnail['1x']}}"
-               ng-srcset="{{result.thumbnail['1x']}} 1x,
-                          {{result.thumbnail['2x']}} 2x"
-               alt="{{result.name}}" title="{{result.name}}">
-          <a class="site-header__results-link">{{result.name}}</a>
-        </li>
-      </ol>
-      <ul>
-        <li ng-if="results[0].thumbnail['1x']">
-          <img class="site-header__results-image"
-               ng-src="{{results[0].thumbnail['1x']}}"
-               ng-srcset="{{results[0].thumbnail['1x']}} 1x,
-                          {{results[0].thumbnail['2x']}} 2x"
-               alt="{{results[0].name}}" title="{{results[0].name}}">
-        </li>
-        <li>{{results[0].name}}</li>
-        <li>{{results[0].mbid}}</li>
-      </ul>
+    <div class="site-header__alternative-artist" ng-show="results.length > 0">
+      <small>
+        <strong>Not what you were looking for?
+          <span class="link" role="button"
+                ng-click="moreResults = ! moreResults"> Did you mean...</span>
+        </strong>
+      </small>
     </div>
 
     <div class="alert--error" ng-if="error">
