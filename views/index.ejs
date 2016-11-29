@@ -1,7 +1,7 @@
 <!doctype html>
-<!--[if lt IE 9]>      <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 lt-ie9"><![endif]-->
-<!--[if IE 9]>         <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js lt-ie10 ie9"><![endif]-->
-<!--[if gt IE 9]><!--> <html ng-app="musicMashup" lang="en" dir="ltr" class="no-js"><!--<![endif]-->
+<!--[if lt IE 9]>      <html lang="en" dir="ltr" class="no-js lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]>         <html lang="en" dir="ltr" class="no-js lt-ie10 ie9"><![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" dir="ltr" class="no-js"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,21 +12,11 @@
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <link rel="stylesheet" href="/stylesheets/style.css" />
-
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.js"></script>
 </head>
 
-<body ng-controller="searchArtistCtrl">
+<body>
+  <div id="musicMashup"></div>
 
-  <div class="container">
-
-    <% include partials/header.ejs %>
-
-    <% include partials/main.ejs %>
-
-  </div>
-
-  <script src="javascripts/main.js"></script>
-
+  <script type="text/javascript" src="javascripts/main.js"></script>
 </body>
 </html>
