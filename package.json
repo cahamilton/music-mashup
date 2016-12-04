@@ -47,7 +47,8 @@
     "svg-loader": "^0.0.2",
     "svgo-loader": "^1.1.2",
     "url-loader": "^0.5.7",
-    "webpack": "^1.13.3"
+    "webpack": "^1.13.3",
+    "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
     "chai": "^3.4.1",
