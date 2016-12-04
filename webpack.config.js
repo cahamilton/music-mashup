@@ -1,5 +1,8 @@
 const path = require('path');
 
+const precss = require('precss');
+const cssnext = require('postcss-cssnext');
+
 module.exports = {
   context: path.join(__dirname, '/assets/scripts'),
   entry: {
@@ -18,6 +21,29 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
       },
+      {
+        test: /\.(css|pcss)$/,
+        loaders: [
+          'style-loader',
+          'css-loader?modules&localIdentName=[hash:base64:6]',
+          'postcss-loader',
+        ],
+      },
+      {
+        test: /\.svg/,
+        loader: 'url-loader',
+      },
     ],
   },
+  resolve: {
+    root: [
+      path.resolve('/node_modules'),
+      path.resolve('/assets/scripts'),
+    ],
+    extensions: ['', '.js', '.jsx'],
+  },
+  postcss: [
+    precss,
+    cssnext({ browsers: ['last 5 versions'] }),
+  ],
 };
