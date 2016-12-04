@@ -1,9 +1,9 @@
-var chai = require('chai');
-var assert = chai.assert;
+const chai = require('chai');
+const assert = chai.assert;
 
-var api = require('../../routes/api');
+const api = require('../../routes/api');
 
-describe('API', function() {
+describe('API', () => {
 
 });
 

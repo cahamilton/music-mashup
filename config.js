@@ -1,10 +1,10 @@
-var config = {
+const config = {
   keys: {
     lastFM: {
       key: '',
-      secret: ''
-    }
-  }
+      secret: '',
+    },
+  },
 };
 
 module.exports = config;

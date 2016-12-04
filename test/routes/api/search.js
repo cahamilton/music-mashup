@@ -1,11 +1,11 @@
-var chai = require('chai');
-var expect = chai.expect;
+const chai = require('chai');
+const expect = chai.expect;
 
-var search = require('../../../routes/api/search');
+const search = require('../../../routes/api/search');
 
 // Mock response data from LastFM
 /* eslint-disable */
-var data = {
+const data = {
   "results": {
     "opensearch:Query": {
       "#text": "",
@@ -356,15 +356,14 @@ var data = {
 };
 /* eslint-enable */
 
-describe('API', function() {
-  describe('search.artist()', function() {});
+describe('API', () => {
+  describe('search.artist()', () => {});
 
-  describe('search.artist.successHandler()', function() {
-    var noop = function() {};
-    var results = search.artist.successHandler(data, noop);
+  describe('search.artist.successHandler()', () => {
+    const noop = () => {};
+    const results = search.artist.successHandler(data, noop);
 
-    it('should return an Object which has a `query`' +
-      ' and `matches` property keys', function() {
+    it('should return an Object which has a `query` and `matches` property keys', () => {
       expect(results)
         .to.be.an('Object');
 
@@ -377,8 +376,8 @@ describe('API', function() {
         .that.is.a('Array');
     });
 
-    it('should return no matches with an empty `mbid` property', function() {
-      results.matches.forEach(function(result) {
+    it('should return no matches with an empty `mbid` property', () => {
+      results.matches.forEach((result) => {
         expect(result.mbid)
           .to.be.a('String')
           .and.to.not.be.empty;
@@ -386,26 +385,25 @@ describe('API', function() {
     });
   });
 
-  describe('search.artist.errorHandler()', function() {});
+  describe('search.artist.errorHandler()', () => {});
 
-  describe('search.artist.formatData()', function() {
-    it('should return an Object with a `mbid` and `name`' +
-      ' property key', function() {
+  describe('search.artist.formatData()', () => {
+    it('should return an Object with a `mbid` and `name` property key', () => {
       // The Offspring
-      var artist = data.results.artistmatches.artist[0];
-      var results = search.artist.formatData(artist);
+      const artist = data.results.artistmatches.artist[0];
+      const results = search.artist.formatData(artist);
 
       expect(results)
         .to.be.an('Object')
         .and.to.include.keys('mbid', 'name');
     });
 
-    it('should return `thumbnail` object if images exists', function() {
+    it('should return `thumbnail` object if images exists', () => {
       // The Offspring
-      var artist = data.results.artistmatches.artist[0];
-      var thumbnail1x = artist.image[0]['#text'];
-      var thumbnail2x = artist.image[1]['#text'];
-      var results = search.artist.formatData(artist);
+      const artist = data.results.artistmatches.artist[0];
+      const thumbnail1x = artist.image[0]['#text'];
+      const thumbnail2x = artist.image[1]['#text'];
+      const results = search.artist.formatData(artist);
 
       expect(results)
         .to.have.deep.property('thumbnail.1x')
@@ -418,10 +416,10 @@ describe('API', function() {
         .and.to.be.a('String');
     });
 
-    it('should not return `thumbnail` object if images dont exist', function() {
+    it('should not return `thumbnail` object if images dont exist', () => {
       // Celtic Offspring
-      var artist = data.results.artistmatches.artist[6];
-      var results = search.artist.formatData(artist);
+      const artist = data.results.artistmatches.artist[6];
+      const results = search.artist.formatData(artist);
 
       expect(results)
         .to.not.have.deep.property('thumbnail');

@@ -1,12 +1,12 @@
-var config = require('../../config');
+const config = require('../../config');
 
-var LastFmNode = require('lastfm').LastFmNode;
-var lastfm = new LastFmNode({
+const LastFmNode = require('lastfm').LastFmNode;
+const lastfm = new LastFmNode({
   api_key: config.keys.lastFM.key,
-  secret: config.keys.lastFM.secret
+  secret: config.keys.lastFM.secret,
 });
 
-var search = {};
+const search = {};
 
 /**
  * Function to query LastFM API for artist matches
@@ -17,13 +17,13 @@ search.artist = (artistName, callback) => {
   lastfm.request('artist.search', {
     artist: artistName,
     handlers: {
-      success: results => {
+      success: (results) => {
         search.artist.successHandler(results, callback);
       },
-      error: error => {
+      error: (error) => {
         search.artist.errorHandler(error, callback);
-      }
-    }
+      },
+    },
   });
 };
 
@@ -34,18 +34,18 @@ search.artist = (artistName, callback) => {
  * @return {Object} results - Newly formatted results object
  */
 search.artist.successHandler = (data, callback) => {
-  var searchQuery = data.results['opensearch:Query'].searchTerms;
-  var searchMatches = data.results.artistmatches.artist;
+  const searchQuery = data.results['opensearch:Query'].searchTerms;
+  const searchMatches = data.results.artistmatches.artist;
 
-  var results = {};
+  const results = {};
   results.query = searchQuery;
   results.matches = [];
 
-  searchMatches.forEach(match => {
+  searchMatches.forEach((match) => {
     // Sieve out bad artist data and only return results that contain a
     // valid MusicBrainz ID
     if (match.mbid) {
-      var artistData = search.artist.formatData(match);
+      const artistData = search.artist.formatData(match);
       results.matches.push(artistData);
     }
   });
@@ -70,13 +70,13 @@ search.artist.errorHandler = (error, callback) => {
  * @param {Object} data - Object of artist data returned from LastFM API call
  * @return {Object} artist - Newly formatted object of artist data
  */
-search.artist.formatData = data => {
-  var artist = {};
+search.artist.formatData = (data) => {
+  const artist = {};
   artist.name = data.name;
   artist.mbid = data.mbid;
 
-  var thumbnailNormal = data.image[0]['#text'];
-  var thumbnailRetina = data.image[1]['#text'];
+  const thumbnailNormal = data.image[0]['#text'];
+  const thumbnailRetina = data.image[1]['#text'];
 
   if (thumbnailNormal !== '') {
     artist.thumbnail = {};

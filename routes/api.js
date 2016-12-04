@@ -1,24 +1,24 @@
-var express = require('express');
-var router = express.Router();
+const express = require('express');
+const router = express.Router();
 
-var search = require('./api/search');
+const search = require('./api/search');
 
-router.get('/search/', function(req, res, next) {
+router.get('/search/', (req, res, next) => {
   res.status(404).send({
-    error: 'Missing artistName parameter'
+    error: 'Missing artistName parameter',
   });
 });
 
-router.get('/search/:artistName', function(req, res, next) {
-  var artistName = req.params.artistName;
-  search.artist(artistName, function(data) {
+router.get('/search/:artistName', (req, res, next) => {
+  const artistName = req.params.artistName;
+  search.artist(artistName, (data) => {
     res.json(data);
   });
 });
 
-router.use(function(req, res, next) {
+router.use((req, res, next) => {
   res.status(404).send({
-    error: 'Invalid API Method called'
+    error: 'Invalid API Method called',
   });
 });
 
