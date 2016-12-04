@@ -1,0 +1,22 @@
+/* Alternative Toggle */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.container {
+  line-height: 2;
+  text-align: center;
+
+  @media (--med) {
+    position: absolute;
+    text-align: left;
+  }
+}
+
+.button {
+  border-radius: 0;
+  line-height: initial;
+  font-weight: inherit;
+
+  &:focus {
+    outline: 0;
+  }
+}
