@@ -5,6 +5,8 @@ import 'normalize.css';
 import '../stylesheets/base/font-face.pcss';
 import '../stylesheets/base/global.pcss';
 
+import Header from './components/Header/Header';
+
 class Mashup extends Component {
 
   constructor(props) {
@@ -14,7 +16,7 @@ class Mashup extends Component {
   render() {
     return (
       <div className="container">
-        <h1>Music Mashup</h1>
+        <Header />
       </div>
     );
   }

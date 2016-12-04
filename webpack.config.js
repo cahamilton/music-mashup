@@ -31,7 +31,10 @@ module.exports = {
       },
       {
         test: /\.svg/,
-        loader: 'url-loader',
+        loaders: [
+          'url-loader',
+          'svgo-loader',
+        ],
       },
     ],
   },
