@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import styles from './Alternative.pcss';
 
+import AlternativeItem from './AlternativeItem';
+
 class Alternative extends Component {
   constructor(props) {
     super(props);
@@ -11,21 +13,15 @@ class Alternative extends Component {
     const matches = this.props.matches;
     const isVisible = this.props.isVisible;
 
-    const listItems = matches.map((match, index) => {
-      return (
-        <li key={`${index}-${match.mbid}`} className={styles.item}>
-          <a className={styles.link}>
-            <img
-              src={match.thumbnail['1x']}
-              srcSet={`${match.thumbnail['1x']} 1x, ${match.thumbnail['2x']} 2x`}
-              className={styles.image} width="32" height="32" alt={match.name}
-              title={match.name}
-            />
-            <span className={styles.name}>{match.name}</span>
-          </a>
-        </li>
-      );
-    });
+    const listItems = matches.map((match, index) =>
+      <AlternativeItem
+        key={`${index}-${match.mbid}`}
+        mbid={match.mbid}
+        name={match.name}
+        thumbnail={(match.thumbnail && match.thumbnail['1x']) ? match.thumbnail['1x'] : ''}
+        thumbnailRetina={(match.thumbnail && match.thumbnail['2x']) ? match.thumbnail['2x'] : ''}
+      />,
+    );
 
     return (
       <section className={styles.container} hidden={!isVisible}>
