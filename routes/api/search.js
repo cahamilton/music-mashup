@@ -24,28 +24,22 @@ search.artist = artistName => new Promise((resolve, reject) => {
 
 /**
  * Success handler for search.artist() function
+ *
+ * Uses Array.filter and Array.map to filter out bad artist data. Will only return results that
+ * contain a valid MusicBrainz ID
+ *
  * @param {Object} data - Object of data from LastFM API call
  * @return {Object} results - Newly formatted results object
  */
-search.artist.successHandler = (data) => {
-  const searchQuery = data.results['opensearch:Query'].searchTerms;
-  const searchMatches = data.results.artistmatches.artist;
 
-  const results = {};
-  results.query = searchQuery;
-  results.matches = [];
-
-  searchMatches.forEach((match) => {
-    // Sieve out bad artist data and only return results that contain a
-    // valid MusicBrainz ID
-    if (match.mbid) {
-      const artistData = search.artist.formatData(match);
-      results.matches.push(artistData);
-    }
-  });
-
-  return results;
-};
+search.artist.successHandler = data => ({
+  query: data.results['opensearch:Query'].searchTerms,
+  matches: (
+    data.results.artistmatches.artist
+      .filter(artist => artist.mbid)
+      .map(artist => search.artist.formatData(artist))
+  ),
+});
 
 /**
  * Error handler for search.artist() function
