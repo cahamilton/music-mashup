@@ -1,6 +1,6 @@
 const config = require('../../config');
-
 const LastFmNode = require('lastfm').LastFmNode;
+
 const lastfm = new LastFmNode({
   api_key: config.keys.lastFM.key,
   secret: config.keys.lastFM.secret,
@@ -11,29 +11,23 @@ const search = {};
 /**
  * Function to query LastFM API for artist matches
  * @param {String} artistName - Artist to search for
- * @param {Function} callback - Callback function to pass to handlers
  */
-search.artist = (artistName, callback) => {
+search.artist = artistName => new Promise((resolve, reject) => {
   lastfm.request('artist.search', {
     artist: artistName,
     handlers: {
-      success: (results) => {
-        search.artist.successHandler(results, callback);
-      },
-      error: (error) => {
-        search.artist.errorHandler(error, callback);
-      },
+      success: results => resolve(search.artist.successHandler(results)),
+      error: error => reject(search.artist.errorHandler(error)),
     },
   });
-};
+});
 
 /**
  * Success handler for search.artist() function
  * @param {Object} data - Object of data from LastFM API call
- * @param {Function} callback - Callback function
  * @return {Object} results - Newly formatted results object
  */
-search.artist.successHandler = (data, callback) => {
+search.artist.successHandler = (data) => {
   const searchQuery = data.results['opensearch:Query'].searchTerms;
   const searchMatches = data.results.artistmatches.artist;
 
@@ -50,20 +44,15 @@ search.artist.successHandler = (data, callback) => {
     }
   });
 
-  callback(results);
   return results;
 };
 
 /**
  * Error handler for search.artist() function
  * @param {Object} error - Object of error data from LastFM API call
- * @param {Function} callback - Callback function
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = (error, callback) => {
-  callback(error);
-  return error;
-};
+search.artist.errorHandler = error => ({ error: error.message });
 
 /**
  * Returns formatted artist data from LastFM search matches

@@ -1,4 +1,4 @@
 node_modules
 coverage
-/test/routes/api/mocks/
+**/__mocks__/**/*
 /public/

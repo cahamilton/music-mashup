@@ -3,14 +3,15 @@
   "version": "2.0.0",
   "description": "Music Mashup - Your tasteful resource for music knowledge!",
   "author": "Carl Hamilton <info@carlhamilton.co.uk>",
+  "private": true,
+  "license": "MIT",
+  "main": "app.js",
   "scripts": {
     "start": "node ./bin/www",
     "lint": "eslint . --ext .js --ext .jsx",
-    "test": "mocha",
-    "coverage": "./node_modules/istanbul/lib/cli.js cover ./node_modules/mocha/bin/_mocha",
+    "test": "jest",
     "webpack": "webpack"
   },
-  "main": "app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/cahamilton/music-mashup"
@@ -51,16 +52,28 @@
     "whatwg-fetch": "^2.0.1"
   },
   "devDependencies": {
-    "chai": "^3.4.1",
     "eslint": "^3.11.0",
     "eslint-config-airbnb": "^13.0.0",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-jsx-a11y": "^2.2.3",
     "eslint-plugin-react": "^6.7.1",
-    "istanbul": "^0.4.1",
-    "mocha": "^2.3.4",
+    "jest": "^18.0.0",
     "webpack-dev-server": "^1.16.2"
   },
-  "private": true,
-  "license": "MIT"
+  "jest": {
+    "cacheDirectory": "/tmp/jest/",
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "**/assets/**/*.{js,jsx}",
+      "**/routes/**/*.{js,jsx}",
+      "!**/coverage/**",
+      "!**/public/**"
+    ],
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+      "lcov",
+      "text-summary"
+    ],
+    "notify": true
+  }
 }
