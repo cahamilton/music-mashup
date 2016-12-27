@@ -57,8 +57,25 @@ describe('API', () => {
       it('should not return `thumbnail` object if images dont exist', () => {
         const match = search.artist.formatData(matches.artist[6]);
 
-        expect(match.name).toEqual('Celtic Offspring');
-        expect(match).not.toEqual(expect.objectContaining({ thumbnail: {} }));
+        expect(match).toEqual(expect.objectContaining({
+          name: 'Celtic Offspring',
+          mbid: '985dcdd3-3968-42c2-9057-97b1413ef824',
+        }));
+        expect(match).not.toEqual(expect.objectContaining({
+          thumbnail: expect.anything() || undefined,
+        }));
+      });
+
+      it('should not return a `2x` key if image does not exists', () => {
+        const match = search.artist.formatData(matches.artist[8]);
+
+        expect(match).toEqual(expect.objectContaining({
+          name: 'Final Offspring',
+          mbid: '85f00af5-0779-8376-c3ed-2c9f02d41f96',
+        }));
+        expect(match.thumbnail).not.toEqual(expect.objectContaining({
+          '2x': expect.anything(),
+        }));
       });
     });
   });

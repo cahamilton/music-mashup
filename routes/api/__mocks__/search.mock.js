@@ -158,23 +158,23 @@ module.exports = {
         }, {
           "name": "Final Offspring",
           "listeners": "187",
-          "mbid": "",
+          "mbid": "85f00af5-0779-8376-c3ed-2c9f02d41f96",
           "url": "http://www.last.fm/music/Final+Offspring",
           "streamable": "0",
           "image": [{
             "#text": "http://img2-ak.lst.fm/i/u/34s/35987c559df444b3ba40f097ab7db97d.png",
             "size": "small"
           }, {
-            "#text": "http://img2-ak.lst.fm/i/u/64s/35987c559df444b3ba40f097ab7db97d.png",
+            "#text": "",
             "size": "medium"
           }, {
-            "#text": "http://img2-ak.lst.fm/i/u/174s/35987c559df444b3ba40f097ab7db97d.png",
+            "#text": "",
             "size": "large"
           }, {
-            "#text": "http://img2-ak.lst.fm/i/u/300x300/35987c559df444b3ba40f097ab7db97d.png",
+            "#text": "",
             "size": "extralarge"
           }, {
-            "#text": "http://img2-ak.lst.fm/i/u/35987c559df444b3ba40f097ab7db97d.png",
+            "#text": "",
             "size": "mega"
           }]
         }, {

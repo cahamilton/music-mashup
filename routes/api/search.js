@@ -46,7 +46,7 @@ search.artist.successHandler = data => ({
  * @param {Object} error - Object of error data from LastFM API call
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = error => ({ error: error.message });
+search.artist.errorHandler = error => ({error: error.message});
 
 /**
  * Returns formatted artist data from LastFM search matches
@@ -54,23 +54,19 @@ search.artist.errorHandler = error => ({ error: error.message });
  * @return {Object} artist - Newly formatted object of artist data
  */
 search.artist.formatData = (data) => {
-  const artist = {};
-  artist.name = data.name;
-  artist.mbid = data.mbid;
+  const normal = data.image[0]['#text'];
+  const retina = data.image[1]['#text'];
 
-  const thumbnailNormal = data.image[0]['#text'];
-  const thumbnailRetina = data.image[1]['#text'];
-
-  if (thumbnailNormal !== '') {
-    artist.thumbnail = {};
-    artist.thumbnail['1x'] = thumbnailNormal;
-
-    if (thumbnailRetina !== '') {
-      artist.thumbnail['2x'] = thumbnailRetina;
-    }
-  }
-
-  return artist;
+  return JSON.parse(JSON.stringify({
+    name: data.name,
+    mbid: data.mbid,
+    thumbnail: (
+      normal || retina ? {
+        '1x': normal || undefined,
+        '2x': retina || undefined,
+      } : undefined
+    ),
+  }));
 };
 
 module.exports = search;
