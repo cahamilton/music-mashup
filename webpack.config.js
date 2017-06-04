@@ -1,15 +1,17 @@
 const path = require('path');
+const webpack = require('webpack');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
-  context: path.join(__dirname, '/assets/scripts'),
+  context: path.join(__dirname, '/assets/'),
   entry: {
-    mashup: './index',
+    mashup: './scripts/index',
   },
   output: {
-    path: path.join(__dirname, '/public/scripts'),
-    publicPath: '/scripts',
-    filename: '[name].js',
-    chunkFilename: '[name].[chunkhash].js',
+    path: path.join(__dirname, '/public/'),
+    publicPath: '/',
+    filename: './scripts/[name].js',
+    chunkFilename: './scripts/[name].[chunkhash].js',
   },
   module: {
     rules: [
@@ -22,11 +24,26 @@ module.exports = {
       },
       {
         test: /\.(css|pcss)$/,
-        use: [
-          'style-loader',
-          'css-loader?modules&localIdentName=[hash:base64:6]',
-          'postcss-loader',
-        ],
+        use: ExtractTextPlugin.extract({
+          fallback: 'style-loader',
+          use: [
+            {
+              loader: 'css-loader',
+              options: {
+                modules: true,
+                importLoaders: 1,
+                localIdentName: '[hash:base64:6]',
+                sourceMap: true,
+              },
+            },
+            {
+              loader: 'postcss-loader',
+              options: {
+                sourceMap: true,
+              },
+            },
+          ],
+        }),
       },
       {
         test: /\.svg/,
@@ -37,6 +54,15 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new webpack.SourceMapDevToolPlugin({
+      filename: '[file].map',
+      exclude: ['./scripts/mashup.js'],
+    }),
+    new ExtractTextPlugin({
+      filename: './stylesheets/mashup.css',
+    }),
+  ],
   resolve: {
     extensions: ['.js', '.jsx'],
   },
