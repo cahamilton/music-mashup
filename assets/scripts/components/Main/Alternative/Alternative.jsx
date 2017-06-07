@@ -1,38 +1,36 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Alternative.pcss';
 
 import AlternativeItem from './AlternativeItem';
 
-class Alternative extends Component {
-  constructor(props) {
-    super(props);
-  }
+const Alternative = (props) => {
+  const matches = props.matches;
+  const isVisible = props.isVisible;
 
-  render() {
-    const matches = this.props.matches;
-    const isVisible = this.props.isVisible;
+  const listItems = matches.map((match) => {
+    const key = `${match.name}-${match.mbid.substring(0, 8)}`.replace(/\s+/g, '-').toLowerCase();
 
-    const listItems = matches.map((match, index) =>
+    return (
       <AlternativeItem
-        key={`${index}-${match.mbid}`}
+        key={key}
         mbid={match.mbid}
         name={match.name}
         thumbnail={(match.thumbnail && match.thumbnail['1x']) ? match.thumbnail['1x'] : ''}
         thumbnailRetina={(match.thumbnail && match.thumbnail['2x']) ? match.thumbnail['2x'] : ''}
-      />,
+      />
     );
+  });
 
-    return (
-      <section className={styles.container} hidden={!isVisible}>
-        <ol className={styles.list}>
-          { listItems }
-        </ol>
-      </section>
-    );
-  }
-}
+  return (
+    <section className={styles.container} hidden={!isVisible}>
+      <ol className={styles.list}>
+        { listItems }
+      </ol>
+    </section>
+  );
+};
 
 Alternative.propTypes = {
   isVisible: PropTypes.bool.isRequired,
