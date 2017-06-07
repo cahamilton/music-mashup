@@ -28,7 +28,13 @@ info.mbid = musicBrainzID => new Promise((resolve, reject) => {
  * @return {Object} results - Newly formatted results object
  */
 
-info.mbid.successHandler = data => data;
+info.mbid.successHandler = data => ({
+  name: data.artist.name,
+  mbid: data.artist.mbid,
+  image: data.artist.image[3]['#text'],
+  genre: data.artist.tags.tag[0].name,
+  bio: data.artist.bio.content,
+});
 
 /**
  * Error handler for info.mbid() function
