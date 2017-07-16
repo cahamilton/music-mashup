@@ -25,6 +25,12 @@
     margin-right: 2rem;
     text-align: left;
   }
+
+  &[disabled] {
+    color: #fff;
+    background: color(var(--color--primary) lightness(25%));
+    border-color: color(var(--color--primary) lightness(25%));
+  }
 }
 
 .button {
@@ -44,7 +50,7 @@
     &:hover,
     &:focus,
     &[disabled] {
-      color: color(var(--color--primary) lightness(40%));
+      color: color(var(--color--primary) lightness(25%));
       outline: 0;
     }
 

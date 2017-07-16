@@ -11,15 +11,19 @@ class Search extends Component {
   constructor(props) {
     super(props);
     this.state = { query: '', loading: false };
-    this.inputHandler = this.inputHandler.bind(this);
-    this.formHandler = this.formHandler.bind(this);
+    this.inputChangeHandler = this.inputChangeHandler.bind(this);
+    this.formSubmitHandler = this.formSubmitHandler.bind(this);
   }
 
-  inputHandler(event) {
+  static inputFocusHandler(event) {
+    event.target.select();
+  }
+
+  inputChangeHandler(event) {
     this.setState({ query: event.target.value });
   }
 
-  formHandler(event) {
+  formSubmitHandler(event) {
     event.preventDefault();
     this.setState({ loading: true });
 
@@ -45,18 +49,19 @@ class Search extends Component {
   render() {
     return (
       <div className={styles.container}>
-        <form onSubmit={this.formHandler} className={styles.form}>
+        <form onSubmit={this.formSubmitHandler} className={styles.form}>
           <input
-            onChange={this.inputHandler}
+            onChange={this.inputChangeHandler}
+            onFocus={Search.inputFocusHandler}
             className={styles.input}
             type="text"
             placeholder="Search for an Artist..."
             autoComplete="off"
-            autoFocus="true"
             required="true"
             value={this.state.query}
+            disabled={this.state.loading}
           />
-          <button type="submit" className={styles.button}>Go</button>
+          <button type="submit" className={styles.button} disabled={this.state.loading}>Go</button>
         </form>
         <AlternativeToggle
           matches={this.props.searchState.matches.length}
