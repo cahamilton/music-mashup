@@ -1,4 +1,6 @@
 const config = require('../../config');
+const utils = require('../../utilities');
+
 const LastFmNode = require('lastfm').LastFmNode;
 
 const lastfm = new LastFmNode({
@@ -32,8 +34,8 @@ info.mbid.successHandler = data => ({
   name: data.artist.name,
   mbid: data.artist.mbid,
   image: data.artist.image[3]['#text'],
-  genre: data.artist.tags.tag[0].name,
-  bio: data.artist.bio.content,
+  genre: utils.titleCase(data.artist.tags.tag[0].name),
+  bio: utils.nl2br(data.artist.bio.content),
 });
 
 /**
