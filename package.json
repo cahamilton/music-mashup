@@ -50,7 +50,7 @@
     "style-loader": "^0.18.1",
     "svgo-loader": "^1.2.1",
     "url-loader": "^0.5.8",
-    "webpack": "^2.6.1",
+    "webpack": "^3.3.0",
     "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
