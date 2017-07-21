@@ -10,7 +10,8 @@
     "start": "node ./bin/www",
     "lint": "eslint . --ext .js --ext .jsx",
     "test": "jest",
-    "webpack": "webpack"
+    "webpack": "webpack",
+    "webpack-dev-server": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
@@ -46,6 +47,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
+    "react-hot-loader": "^3.0.0-beta.7",
     "serve-favicon": "^2.4.3",
     "style-loader": "^0.18.1",
     "svgo-loader": "^1.2.1",

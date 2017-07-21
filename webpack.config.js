@@ -5,13 +5,24 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
   context: path.join(__dirname, '/assets/'),
   entry: {
-    mashup: './scripts/index',
+    mashup: [
+      'react-hot-loader/patch',
+      './scripts/index',
+    ],
   },
   output: {
     path: path.join(__dirname, '/public/'),
-    publicPath: '/',
+    publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
     filename: './scripts/[name].js',
     chunkFilename: './scripts/[name].[chunkhash].js',
+  },
+  devServer: {
+    compress: true,
+    contentBase: path.join(__dirname, '/public/'),
+    publicPath: 'http://localhost:8080/',
+    headers: {
+      'Access-Control-Allow-Origin': '*',
+    },
   },
   module: {
     rules: [
@@ -55,6 +66,8 @@ module.exports = {
     ],
   },
   plugins: [
+    new webpack.NamedModulesPlugin(),
+    new webpack.HotModuleReplacementPlugin(),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map',
       exclude: ['./scripts/mashup.js'],
