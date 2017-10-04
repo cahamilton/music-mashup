@@ -1,9 +1,8 @@
-const config = require('../../config');
 const LastFmNode = require('lastfm').LastFmNode;
 
 const lastfm = new LastFmNode({
-  api_key: config.keys.lastFM.key,
-  secret: config.keys.lastFM.secret,
+  api_key: process.env.LAST_FM_KEY,
+  secret: process.env.LAST_FM_SECRET,
 });
 
 const search = {};
