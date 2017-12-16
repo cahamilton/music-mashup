@@ -1,45 +1,26 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
+import { AppContainer } from 'react-hot-loader';
 
-import 'normalize.css';
-import '../stylesheets/base/font-face.pcss';
-import '../stylesheets/base/global.pcss';
+import App from './App';
 
-import Header from './components/Header/Header';
-import Main from './components/Main/Main';
-
-class Mashup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      search: { query: '', matches: [] },
-      alternative: { isVisible: false },
-    };
-    this.updateParentState = this.updateParentState.bind(this);
-  }
-
-  updateParentState(object) {
-    this.setState(object);
-  }
-
-  render() {
-    return (
-      <div className="container">
-        <Header
-          searchState={this.state.search}
-          alternativeState={this.state.alternative}
-          updateParentState={this.updateParentState}
-        />
-        <Main
-          searchState={this.state.search}
-          alternativeState={this.state.alternative}
-        />
-      </div>
-    );
-  }
-}
+const RootContainer = document.getElementById('musicMashup');
 
 ReactDOM.render(
-  <Mashup />,
-  document.getElementById('musicMashup'),
+  <AppContainer>
+    <App />
+  </AppContainer>,
+  RootContainer,
 );
+
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default;
+    ReactDOM.render(
+      <AppContainer>
+        <NextApp />
+      </AppContainer>,
+      RootContainer,
+    );
+  });
+}
