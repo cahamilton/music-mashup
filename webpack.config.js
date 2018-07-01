@@ -6,7 +6,6 @@ module.exports = {
   context: path.join(__dirname, '/assets/'),
   entry: {
     mashup: [
-      'react-hot-loader/patch',
       './scripts/index',
     ],
   },
@@ -67,7 +66,6 @@ module.exports = {
   },
   plugins: [
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map',
       exclude: ['./scripts/mashup.js'],

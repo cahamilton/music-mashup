@@ -7,8 +7,5 @@
     }],
     "react",
     "jest"
-  ],
-  "plugins": [
-    "react-hot-loader/babel"
   ]
 }
