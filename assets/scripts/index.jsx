@@ -1,26 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { AppContainer } from 'react-hot-loader';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { devToolsEnhancer } from 'redux-devtools-extension';
 
 import App from './App';
 
-const RootContainer = document.getElementById('musicMashup');
-
-ReactDOM.render(
-  <AppContainer>
-    <App />
-  </AppContainer>,
-  RootContainer,
+const store = createStore(
+  devToolsEnhancer(),
 );
 
-if (module.hot) {
-  module.hot.accept('./App', () => {
-    const NextApp = require('./App').default;
-    ReactDOM.render(
-      <AppContainer>
-        <NextApp />
-      </AppContainer>,
-      RootContainer,
-    );
-  });
-}
+const RootContainer = document.getElementById('musicMashup');
+
+const render = () => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    RootContainer,
+  );
+};
+
+store.subscribe(render);
+
+render();
