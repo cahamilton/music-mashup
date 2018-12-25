@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { searchFetch } from '../../../../actions/search/search.actions';
+import { searchByArtistName } from '../../../../actions/search/search.actions';
 
 import Component from '../SearchForm';
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onFormSubmit: artist => dispatch(searchFetch(artist)),
+  onFormSubmit: artist => dispatch(searchByArtistName(artist)),
 });
 
 const Search = connect(

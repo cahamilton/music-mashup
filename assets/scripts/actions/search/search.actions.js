@@ -42,11 +42,11 @@ export const searchResultsVisibleToggle = () => ({
 });
 
 /**
- * Trigger Artist Search
+ * Trigger Search by Artist name
  * @param artist
  * @returns {function(*): Promise<any>}
  */
-export const searchFetch = artist => (dispatch) => {
+export const searchByArtistName = artist => (dispatch) => {
   dispatch(searchPending());
 
   const url = `/api/search/${encodeURIComponent(artist)}`;
