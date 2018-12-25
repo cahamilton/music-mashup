@@ -23,29 +23,23 @@ search.artist = artistName => new Promise((resolve, reject) => {
 
 /**
  * Success handler for search.artist() function
- *
- * Uses Array.filter and Array.map to filter out bad artist data. Will only return results that
- * contain a valid MusicBrainz ID
- *
  * @param {Object} data - Object of data from LastFM API call
  * @return {Object} results - Newly formatted results object
  */
+search.artist.successHandler = (data) => {
+  const query = data.results['opensearch:Query'].searchTerms;
+  const artists = search.artist.filterMatches(data.results.artistmatches.artist);
+  const matches = artists.map(artist => search.artist.formatData(artist));
 
-search.artist.successHandler = data => ({
-  query: data.results['opensearch:Query'].searchTerms,
-  matches: (
-    data.results.artistmatches.artist
-      .filter(artist => artist.mbid)
-      .map(artist => search.artist.formatData(artist))
-  ),
-});
+  return ({ query, matches });
+};
 
 /**
  * Error handler for search.artist() function
  * @param {Object} error - Object of error data from LastFM API call
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = error => ({error: error.message});
+search.artist.errorHandler = error => ({ error: error.message });
 
 /**
  * Returns formatted artist data from LastFM search matches
@@ -66,6 +60,25 @@ search.artist.formatData = (data) => {
       } : undefined
     ),
   }));
+};
+
+/**
+ * Return filtered artists matches - only return items with a valid and unique MusicBrainz ID
+ * @param {Array} matches - Array of artist matches
+ * @returns {Array}
+ */
+search.artist.filterMatches = (matches) => {
+  const mbids = [];
+
+  return matches
+    .filter(artist => artist.mbid)
+    .filter((artist) => {
+      if (mbids.includes(artist.mbid)) {
+        return false;
+      }
+      mbids.push(artist.mbid);
+      return true;
+    });
 };
 
 module.exports = search;

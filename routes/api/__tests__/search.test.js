@@ -78,5 +78,24 @@ describe('API', () => {
         }));
       });
     });
+
+    describe('filterMatches', () => {
+      it('should return only unique and valid items with a MusicBrainz ID', () => {
+        const artists = [
+          { name: 'Muse', mbid: 'fd857293-5ab8-40de-b29e-55a69d4e4d0f' },
+          { name: 'Fake Muse' },
+          { name: 'Muse and Someone Else', mbid: 'fd857293-5ab8-40de-b29e-55a69d4e4d0f' },
+          { name: 'The Music', mbid: '85f00af5-0779-8376-c3ed-2c9f02d41f96' },
+          { name: 'Muse and Someone Else\'s Cat' },
+          { name: 'Fake Muse', mbid: 'fd857293-5ab8-40de-b29e-55a69d4e4d0f' },
+        ];
+        const expected = [
+          { name: 'Muse', mbid: 'fd857293-5ab8-40de-b29e-55a69d4e4d0f' },
+          { name: 'The Music', mbid: '85f00af5-0779-8376-c3ed-2c9f02d41f96' },
+        ];
+        const results = search.artist.filterMatches(artists);
+        expect(results).toEqual(expected);
+      });
+    });
   });
 });
