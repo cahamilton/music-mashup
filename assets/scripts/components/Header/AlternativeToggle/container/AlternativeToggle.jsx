@@ -7,7 +7,7 @@ const mapStateToProps = (state) => {
   const { matches } = state.search.results;
 
   return {
-    isVisible: !!matches.length,
+    isVisible: matches.length > 1,
   };
 };
 
