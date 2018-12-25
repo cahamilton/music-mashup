@@ -10,6 +10,6 @@ const Search = () => (
     <SearchForm />
     <AlternativeToggle />
   </div>
-  );
+);
 
 export default Search;

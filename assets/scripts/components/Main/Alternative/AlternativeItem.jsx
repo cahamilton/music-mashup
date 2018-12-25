@@ -6,46 +6,68 @@ import styles from './Alternative.pcss';
 import placeholder from './placeholder.svg';
 
 class AlternativeItem extends Component {
-  constructor(props) {
-    super(props);
-    this.generateImgSrc = this.generateImgSrc.bind(this);
-    this.generateImgSrcSet = this.generateImgSrcSet.bind(this);
+
+  static generateImgSrc(thumbnail) {
+    const hasSrc = thumbnail !== '';
+
+    if (hasSrc) {
+      return thumbnail;
+    }
+
+    return placeholder;
   }
 
-  generateImgSrc() {
-    return this.props.thumbnail !== ''
-      ? this.props.thumbnail
-      : placeholder;
-  }
+  static generateImgSrcSet(thumbnail, thumbnailRetina) {
+    const hasSrcSet = thumbnail !== '' && thumbnailRetina !== '';
 
-  generateImgSrcSet() {
-    return this.props.thumbnail !== '' && this.props.thumbnailRetina !== ''
-      ? `${this.props.thumbnail} 1x, ${this.props.thumbnailRetina} 2x`
-      : '';
+    if (hasSrcSet) {
+      return `${thumbnail} 1x, ${thumbnailRetina} 2x`;
+    }
+
+    return '';
   }
 
   render() {
+    const {
+      mbid,
+      name,
+      onClick,
+      thumbnail,
+      thumbnailRetina,
+    } = this.props;
+
+    const src = AlternativeItem.generateImgSrc(thumbnail);
+
+    const srcSet = AlternativeItem.generateImgSrcSet(thumbnail, thumbnailRetina);
+
     return (
-      <li className={styles.item}>
-        <a className={styles.link}>
-          <img
-            width="32"
-            height="32"
-            src={this.generateImgSrc()}
-            srcSet={this.generateImgSrcSet()}
-            alt={this.props.name}
-            title={this.props.name}
-            className={styles.image}
-          />
-          <span className={styles.name}>{this.props.name}</span>
-        </a>
-      </li>
+      <button
+        className={styles.button}
+        onClick={() => onClick(mbid)}
+      >
+        <img
+          width="32"
+          height="32"
+          src={src}
+          srcSet={srcSet}
+          alt={name}
+          title={name}
+          className={styles.image}
+        />
+        <span
+          className={styles.name}
+        >
+          {name}
+        </span>
+      </button>
     );
   }
 }
 
 AlternativeItem.propTypes = {
+  mbid: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
+  onClick: PropTypes.func.isRequired,
   thumbnail: PropTypes.string.isRequired,
   thumbnailRetina: PropTypes.string.isRequired,
 };
