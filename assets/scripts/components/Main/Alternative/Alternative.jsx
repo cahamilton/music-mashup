@@ -6,26 +6,50 @@ import styles from './Alternative.pcss';
 import AlternativeItem from './AlternativeItem';
 
 const Alternative = (props) => {
-  const matches = props.matches;
-  const isVisible = props.isVisible;
+  const {
+    isVisible,
+    matches,
+    onClickItem,
+  } = props;
+
+  if (matches.length <= 1) {
+    return null;
+  }
 
   const listItems = matches.map((match) => {
-    const key = `${match.name}-${match.mbid.substring(0, 8)}`.replace(/\s+/g, '-').toLowerCase();
+    const {
+      mbid,
+      name,
+      thumbnail,
+    } = match;
+
+    const normal = (thumbnail && thumbnail['1x']) ? thumbnail['1x'] : '';
+    const retina = (thumbnail && thumbnail['2x']) ? thumbnail['2x'] : '';
 
     return (
-      <AlternativeItem
-        key={key}
-        mbid={match.mbid}
-        name={match.name}
-        thumbnail={(match.thumbnail && match.thumbnail['1x']) ? match.thumbnail['1x'] : ''}
-        thumbnailRetina={(match.thumbnail && match.thumbnail['2x']) ? match.thumbnail['2x'] : ''}
-      />
+      <li
+        key={mbid}
+        className={styles.item}
+      >
+        <AlternativeItem
+          mbid={mbid}
+          name={name}
+          onClick={onClickItem}
+          thumbnail={normal}
+          thumbnailRetina={retina}
+        />
+      </li>
     );
   });
 
   return (
-    <section className={styles.container} hidden={!isVisible}>
-      <ol className={styles.list}>
+    <section
+      className={styles.container}
+      hidden={!isVisible}
+    >
+      <ol
+        className={styles.list}
+      >
         { listItems }
       </ol>
     </section>
@@ -33,7 +57,7 @@ const Alternative = (props) => {
 };
 
 Alternative.propTypes = {
-  isVisible: PropTypes.bool.isRequired,
+  isVisible: PropTypes.bool,
   matches: PropTypes.arrayOf(PropTypes.shape({
     mbid: PropTypes.string.isRequired,
     name: PropTypes.string.isRequired,
@@ -42,6 +66,12 @@ Alternative.propTypes = {
       '2x': PropTypes.string,
     }),
   })),
+  onClickItem: PropTypes.func.isRequired,
+};
+
+Alternative.defaultProps = {
+  isVisible: false,
+  matches: [],
 };
 
 export default Alternative;
