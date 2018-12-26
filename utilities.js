@@ -1,12 +1,18 @@
+const JSDOM = require('jsdom').JSDOM;
+const createDOMPurify = require('dompurify');
+
+const window = (new JSDOM('')).window;
+const DOMPurify = createDOMPurify(window);
+
 module.exports = {
 
   /**
-   * Converts newlines to line breaks
-   * @param string
+   * Sanitize and process string content
+   * @param {String} string
    * @returns {String}
    */
-  nl2br(string) {
-    return string.replace(/(?:\r\n|\r|\n)/g, '<br>');
+  sanitizeContent(string) {
+    return DOMPurify.sanitize(string).replace(/(?:\r\n|\r|\n)/g, '<br>');
   },
 
   /**

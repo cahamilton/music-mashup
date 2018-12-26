@@ -34,7 +34,7 @@ info.mbid.successHandler = data => ({
   mbid: data.artist.mbid,
   image: data.artist.image[3]['#text'],
   genre: utils.titleCase(data.artist.tags.tag[0].name),
-  bio: utils.nl2br(data.artist.bio.content),
+  bio: utils.sanitizeContent(data.artist.bio.content),
 });
 
 /**
