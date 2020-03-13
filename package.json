@@ -63,7 +63,8 @@
     "svgo-loader": "^1.2.1",
     "url-loader": "^0.5.8",
     "webpack": "^3.3.0",
-    "whatwg-fetch": "^2.0.3"
+    "whatwg-fetch": "^2.0.3",
+    "winston": "^3.2.1"
   },
   "devDependencies": {
     "eslint": "^3.19.0",
