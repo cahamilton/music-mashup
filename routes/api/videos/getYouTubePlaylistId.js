@@ -1,0 +1,39 @@
+/** @format */
+
+const logger = require('../../../logger');
+const { get } = require('axios');
+
+/**
+ * Get YouTube upload playlist
+ * @todo Look at video pagination using pageTokens
+ * @param {String} username - YouTube username
+ * @return {Promise<string|boolean>}
+ */
+const getYouTubePlaylistId = async (username) => {
+  try {
+    const response = await get(
+      'https://www.googleapis.com/youtube/v3/channels',
+      {
+        params: {
+          key: process.env.YOUTUBE_KEY,
+          part: 'contentDetails',
+          forUsername: username,
+        },
+      },
+    );
+
+    const { items } = response.data;
+
+    if (!items.length) {
+      return false;
+    }
+
+    return items[0].contentDetails.relatedPlaylists.uploads;
+  } catch (error) {
+    logger.error(error.message);
+
+    return false;
+  }
+};
+
+module.exports = getYouTubePlaylistId;
