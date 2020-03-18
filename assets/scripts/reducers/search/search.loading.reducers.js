@@ -1,6 +1,6 @@
-import {
-  SEARCH_PENDING,
-} from '../../actions/search/search.actions';
+/** @format */
+
+import { SEARCH_PENDING } from '../../actions/search/search.actions';
 
 const loading = (state = false, action) => {
   const { type } = action;

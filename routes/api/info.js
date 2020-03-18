@@ -1,6 +1,7 @@
-const utils = require('../../utilities');
+/** @format */
 
-const LastFmNode = require('lastfm').LastFmNode;
+const { LastFmNode } = require('lastfm');
+const utils = require('../../utilities');
 
 const lastfm = new LastFmNode({
   api_key: process.env.LAST_FM_KEY,
@@ -13,15 +14,17 @@ const info = {};
  * Function to query LastFM API for artist matches
  * @param {String} musicBrainzID - Artist to search for
  */
-info.mbid = musicBrainzID => new Promise((resolve, reject) => {
-  lastfm.request('artist.getInfo', {
-    mbid: musicBrainzID,
-    handlers: {
-      success: results => resolve(info.mbid.successHandler(results)),
-      error: error => reject(info.mbid.errorHandler(error)),
-    },
+info.mbid = (musicBrainzID) => {
+  return new Promise((resolve, reject) => {
+    lastfm.request('artist.getInfo', {
+      mbid: musicBrainzID,
+      handlers: {
+        success: (results) => resolve(info.mbid.successHandler(results)),
+        error: (error) => reject(info.mbid.errorHandler(error)),
+      },
+    });
   });
-});
+};
 
 /**
  * Success handler for info.mbid() function
@@ -29,7 +32,7 @@ info.mbid = musicBrainzID => new Promise((resolve, reject) => {
  * @return {Object} results - Newly formatted results object
  */
 
-info.mbid.successHandler = data => ({
+info.mbid.successHandler = (data) => ({
   name: data.artist.name,
   mbid: data.artist.mbid,
   image: data.artist.image[3]['#text'],
@@ -42,6 +45,6 @@ info.mbid.successHandler = data => ({
  * @param {Object} error - Object of error data from LastFM API call
  * @return {Object} error - Object of error data
  */
-info.mbid.errorHandler = error => ({ error: error.message });
+info.mbid.errorHandler = (error) => ({ error: error.message });
 
 module.exports = info;

@@ -1,3 +1,5 @@
+/** @format */
+
 import { infoUpdate } from '../info/info.actions';
 
 export const SEARCH_PENDING = 'SEARCH_PENDING';
@@ -20,7 +22,7 @@ export const searchPending = () => ({
  * @param payload {String} - Artist name
  * @returns {{type: string, payload: string}}
  */
-export const searchQueryUpdate = payload => ({
+export const searchQueryUpdate = (payload) => ({
   type: SEARCH_QUERY_UPDATE,
   payload,
 });
@@ -30,7 +32,7 @@ export const searchQueryUpdate = payload => ({
  * @param payload {Array} - An array of Search result matches
  * @returns {{type: string, payload: array}}
  */
-export const searchResultsMatchesUpdate = payload => ({
+export const searchResultsMatchesUpdate = (payload) => ({
   type: SEARCH_RESULTS_MATCHES_UPDATE,
   payload,
 });
@@ -48,17 +50,19 @@ export const searchResultsVisibleToggle = () => ({
  * @param mbid
  * @returns {function(*): Promise<any>}
  */
-export const searchByArtistMbid = mbid => (dispatch) => {
+export const searchByArtistMbid = (mbid) => (dispatch) => {
   dispatch(searchPending());
 
   const url = `/api/info/${encodeURIComponent(mbid)}`;
 
   return fetch(url)
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((response) => {
       dispatch(infoUpdate(response));
     })
     .catch((error) => {
+      // TODO: Add logger
+      // eslint-disable-next-line no-console
       console.error(error);
     })
     .finally(() => {
@@ -71,13 +75,13 @@ export const searchByArtistMbid = mbid => (dispatch) => {
  * @param artist
  * @returns {function(*): Promise<any>}
  */
-export const searchByArtistName = artist => (dispatch) => {
+export const searchByArtistName = (artist) => (dispatch) => {
   dispatch(searchPending());
 
   const url = `/api/search/${encodeURIComponent(artist)}`;
 
   return fetch(url)
-    .then(response => response.json())
+    .then((response) => response.json())
     .then((response) => {
       const { query, matches } = response;
       dispatch(searchQueryUpdate(query));
@@ -87,6 +91,8 @@ export const searchByArtistName = artist => (dispatch) => {
       dispatch(searchByArtistMbid(match.mbid));
     })
     .catch((error) => {
+      // TODO: Add logger
+      // eslint-disable-next-line no-console
       console.error(error);
     })
     .finally(() => {

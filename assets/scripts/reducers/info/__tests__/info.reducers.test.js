@@ -1,8 +1,8 @@
+/** @format */
+
 import reducers from '../../reducers';
 
-import {
-  INFO_UPDATE,
-} from '../../../actions/info/info.actions';
+import { INFO_UPDATE } from '../../../actions/info/info.actions';
 
 describe('info.reducers', () => {
   test(INFO_UPDATE, () => {

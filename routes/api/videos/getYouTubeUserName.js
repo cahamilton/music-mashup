@@ -1,7 +1,8 @@
 /** @format */
 
-const logger = require('../../../logger');
 const { MusicBrainzApi } = require('musicbrainz-api');
+
+const logger = require('../../../logger');
 const { author, name, version } = require('../../../package.json');
 
 const musicBrainz = new MusicBrainzApi({

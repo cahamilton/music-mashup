@@ -1,3 +1,5 @@
+/** @format */
+
 import {
   SEARCH_PENDING,
   SEARCH_QUERY_UPDATE,
@@ -22,7 +24,10 @@ describe('search.actions', () => {
 
   test('searchResultsMatchesUpdate', () => {
     const action = searchResultsMatchesUpdate(['Muse', 'Foo Fighters']);
-    expect(action).toEqual({ type: SEARCH_RESULTS_MATCHES_UPDATE, payload: ['Muse', 'Foo Fighters'] });
+    expect(action).toEqual({
+      type: SEARCH_RESULTS_MATCHES_UPDATE,
+      payload: ['Muse', 'Foo Fighters'],
+    });
   });
 
   test('searchResultsVisibleToggle', () => {

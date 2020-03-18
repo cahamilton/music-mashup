@@ -1,12 +1,14 @@
+/** @format */
+
 import React from 'react';
 import PropTypes from 'prop-types';
 
 import styles from './Artist.pcss';
 
-const ArtistHeader = props => (
+const ArtistHeader = ({ name, genre }) => (
   <header className={styles.header}>
-    <h1 className={styles.name}>{props.name}</h1>
-    <h3 className={styles.genre}>{props.genre}</h3>
+    <h1 className={styles.name}>{name}</h1>
+    <h3 className={styles.genre}>{genre}</h3>
   </header>
 );
 

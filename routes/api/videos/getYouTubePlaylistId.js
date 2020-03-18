@@ -1,7 +1,8 @@
 /** @format */
 
-const logger = require('../../../logger');
 const { get } = require('axios');
+
+const logger = require('../../../logger');
 
 /**
  * Get YouTube upload playlist

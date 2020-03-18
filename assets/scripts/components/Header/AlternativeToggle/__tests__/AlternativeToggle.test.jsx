@@ -1,3 +1,5 @@
+/** @format */
+
 import React from 'react';
 import renderer from 'react-test-renderer';
 import AlternativeToggle from '../AlternativeToggle';
@@ -6,9 +8,7 @@ describe('AlternativeToggle', () => {
   const onClick = () => {};
 
   test('return null if props.isVisible is false', () => {
-    const component = renderer.create(
-      <AlternativeToggle onClick={onClick} />,
-    );
+    const component = renderer.create(<AlternativeToggle onClick={onClick} />);
     const json = component.toJSON();
     expect(json).toBeNull();
   });
@@ -17,7 +17,7 @@ describe('AlternativeToggle', () => {
     const component = renderer.create(
       <AlternativeToggle onClick={onClick} isVisible />,
     );
-    const root = component.root;
+    const { root } = component;
     expect(root.findByType('button')).toBeTruthy();
   });
 });

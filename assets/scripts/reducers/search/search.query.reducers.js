@@ -1,6 +1,6 @@
-import {
-  SEARCH_QUERY_UPDATE,
-} from '../../actions/search/search.actions';
+/** @format */
+
+import { SEARCH_QUERY_UPDATE } from '../../actions/search/search.actions';
 
 const query = (state = '', action) => {
   const { type, payload } = action;

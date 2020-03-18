@@ -1,3 +1,5 @@
+/** @format */
+
 import reducers from '../../reducers';
 
 import {
@@ -55,31 +57,41 @@ describe('search.reducers', () => {
     };
     const action = {
       type: SEARCH_RESULTS_MATCHES_UPDATE,
-      payload: [{
-        name: 'Foo Fighters',
-        mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
-        thumbnail: {
-          '1x': 'https://lastfm-img2.akamaized.net/i/u/34s/195ef60b5ce4442c938dc1af0fb83158.png',
-          '2x': 'https://lastfm-img2.akamaized.net/i/u/64s/195ef60b5ce4442c938dc1af0fb83158.png',
+      payload: [
+        {
+          name: 'Foo Fighters',
+          mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
+          thumbnail: {
+            '1x':
+              'https://lastfm-img2.akamaized.net/i/u/34s/195ef60b5ce4442c938dc1af0fb83158.png',
+            '2x':
+              'https://lastfm-img2.akamaized.net/i/u/64s/195ef60b5ce4442c938dc1af0fb83158.png',
+          },
         },
-      }],
+      ],
     };
     const expected = {
       search: {
         results: {
-          matches: [{
-            name: 'Foo Fighters',
-            mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
-            thumbnail: {
-              '1x': 'https://lastfm-img2.akamaized.net/i/u/34s/195ef60b5ce4442c938dc1af0fb83158.png',
-              '2x': 'https://lastfm-img2.akamaized.net/i/u/64s/195ef60b5ce4442c938dc1af0fb83158.png',
+          matches: [
+            {
+              name: 'Foo Fighters',
+              mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
+              thumbnail: {
+                '1x':
+                  'https://lastfm-img2.akamaized.net/i/u/34s/195ef60b5ce4442c938dc1af0fb83158.png',
+                '2x':
+                  'https://lastfm-img2.akamaized.net/i/u/64s/195ef60b5ce4442c938dc1af0fb83158.png',
+              },
             },
-          }],
+          ],
         },
       },
     };
     const store = reducers(state, action);
-    expect(store.search.results.matches).toEqual(expected.search.results.matches);
+    expect(store.search.results.matches).toEqual(
+      expected.search.results.matches,
+    );
   });
 
   test(SEARCH_RESULTS_VISIBLE_TOGGLE, () => {
@@ -101,6 +113,8 @@ describe('search.reducers', () => {
       },
     };
     const store = reducers(state, action);
-    expect(store.search.results.visible).toEqual(expected.search.results.visible);
+    expect(store.search.results.visible).toEqual(
+      expected.search.results.visible,
+    );
   });
 });

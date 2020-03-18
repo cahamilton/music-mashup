@@ -1,11 +1,12 @@
-const JSDOM = require('jsdom').JSDOM;
+/** @format */
+
+const { JSDOM } = require('jsdom');
 const createDOMPurify = require('dompurify');
 
-const window = (new JSDOM('')).window;
+const { window } = new JSDOM('');
 const DOMPurify = createDOMPurify(window);
 
 module.exports = {
-
   /**
    * Sanitize and process string content
    * @param {String} string
@@ -21,7 +22,8 @@ module.exports = {
    * @returns {String}
    */
   titleCase(string) {
-    return string.toLowerCase().replace(/(?:^|\s|-)\S/g, match => match.toUpperCase());
+    return string
+      .toLowerCase()
+      .replace(/(?:^|\s|-)\S/g, (match) => match.toUpperCase());
   },
-
 };

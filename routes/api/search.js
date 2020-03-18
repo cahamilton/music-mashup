@@ -1,4 +1,6 @@
-const LastFmNode = require('lastfm').LastFmNode;
+/** @format */
+
+const { LastFmNode } = require('lastfm');
 
 const lastfm = new LastFmNode({
   api_key: process.env.LAST_FM_KEY,
@@ -11,15 +13,17 @@ const search = {};
  * Function to query LastFM API for artist matches
  * @param {String} artistName - Artist to search for
  */
-search.artist = artistName => new Promise((resolve, reject) => {
-  lastfm.request('artist.search', {
-    artist: artistName,
-    handlers: {
-      success: results => resolve(search.artist.successHandler(results)),
-      error: error => reject(search.artist.errorHandler(error)),
-    },
+search.artist = (artistName) => {
+  return new Promise((resolve, reject) => {
+    lastfm.request('artist.search', {
+      artist: artistName,
+      handlers: {
+        success: (results) => resolve(search.artist.successHandler(results)),
+        error: (error) => reject(search.artist.errorHandler(error)),
+      },
+    });
   });
-});
+};
 
 /**
  * Success handler for search.artist() function
@@ -28,10 +32,12 @@ search.artist = artistName => new Promise((resolve, reject) => {
  */
 search.artist.successHandler = (data) => {
   const query = data.results['opensearch:Query'].searchTerms;
-  const artists = search.artist.filterMatches(data.results.artistmatches.artist);
-  const matches = artists.map(artist => search.artist.formatData(artist));
+  const artists = search.artist.filterMatches(
+    data.results.artistmatches.artist,
+  );
+  const matches = artists.map((artist) => search.artist.formatData(artist));
 
-  return ({ query, matches });
+  return { query, matches };
 };
 
 /**
@@ -39,7 +45,7 @@ search.artist.successHandler = (data) => {
  * @param {Object} error - Object of error data from LastFM API call
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = error => ({ error: error.message });
+search.artist.errorHandler = (error) => ({ error: error.message });
 
 /**
  * Returns formatted artist data from LastFM search matches
@@ -50,16 +56,19 @@ search.artist.formatData = (data) => {
   const normal = data.image[0]['#text'];
   const retina = data.image[1]['#text'];
 
-  return JSON.parse(JSON.stringify({
-    name: data.name,
-    mbid: data.mbid,
-    thumbnail: (
-      normal || retina ? {
-        '1x': normal || undefined,
-        '2x': retina || undefined,
-      } : undefined
-    ),
-  }));
+  return JSON.parse(
+    JSON.stringify({
+      name: data.name,
+      mbid: data.mbid,
+      thumbnail:
+        normal || retina
+          ? {
+              '1x': normal || undefined,
+              '2x': retina || undefined,
+            }
+          : undefined,
+    }),
+  );
 };
 
 /**
@@ -71,7 +80,7 @@ search.artist.filterMatches = (matches) => {
   const mbids = [];
 
   return matches
-    .filter(artist => artist.mbid)
+    .filter((artist) => artist.mbid)
     .filter((artist) => {
       if (mbids.includes(artist.mbid)) {
         return false;
