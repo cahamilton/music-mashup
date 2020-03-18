@@ -1,25 +1,39 @@
-var express = require('express');
-var router = express.Router();
+/** @format */
 
-var search = require('./api/search');
+const express = require('express');
+const search = require('./api/search');
+const info = require('./api/info');
+const videos = require('./api/videos');
 
-router.get('/search/', function(req, res, next) {
-  res.status(404).send({
-    error: 'Missing artistName parameter'
-  });
+const router = express.Router();
+
+router.get('/search/', (req, res) => {
+  res.status(404).json({ error: 'Missing artistName parameter' });
 });
 
-router.get('/search/:artistName', function(req, res, next) {
-  var artistName = req.params.artistName;
-  search.artist(artistName, function(data) {
-    res.json(data);
-  });
+router.get('/search/:artistName', (req, res) => {
+  search
+    .artist(req.params.artistName)
+    .then((results) => res.json(results))
+    .catch((error) => res.status(500).json(error));
 });
 
-router.use(function(req, res, next) {
-  res.status(404).send({
-    error: 'Invalid API Method called'
-  });
+router.get('/info/', (req, res) => {
+  res.status(404).json({ error: 'Missing musicBrainzID parameter' });
+});
+
+router.get('/info/:musicBrainzID', (req, res) => {
+  info
+    .mbid(req.params.musicBrainzID)
+    .then((results) => res.json(results))
+    .catch((error) => res.status(500).json(error));
+});
+
+router.get('/videos/', videos);
+router.get('/videos/:musicBrainzID', videos);
+
+router.use((req, res) => {
+  res.status(404).json({ error: 'Invalid API Method called' });
 });
 
 module.exports = router;

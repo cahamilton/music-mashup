@@ -1,5 +1,8 @@
 /npm-debug.log
 /node_modules
+/logs
 .idea
 .DS_Store
 coverage
+public/stylesheets
+public/scripts

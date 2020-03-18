@@ -1,0 +1,61 @@
+/* Header */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.container {
+  flex: 1 1 auto;
+  align-self: center;
+
+  @media (--med) {
+    margin-left: 2rem;
+  }
+}
+
+.form {
+  display: flex;
+}
+
+.input {
+  flex: 1 0 auto;
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  text-align: center;
+
+  @media (--med) {
+    font-size: 1.5rem;
+    margin-right: 2rem;
+    text-align: left;
+  }
+
+  &[disabled] {
+    color: #fff;
+    background: color(var(--color--primary) lightness(25%));
+    border-color: color(var(--color--primary) lightness(25%));
+  }
+}
+
+.button {
+  display: none;
+
+  @media (--med) {
+    display: inline-block;
+    background: 0;
+    border: 0;
+    padding: 0;
+    margin: 0;
+    font-family: 'PunksNotDeadRegular', 'Arial Black', 'Arial', sans-serif;
+    font-size: 4rem;
+    letter-spacing: 0.1rem;
+    color: var(--color--primary);
+
+    &:hover,
+    &:focus,
+    &[disabled] {
+      color: color(var(--color--primary) lightness(25%));
+      outline: 0;
+    }
+
+    &:active {
+      color: var(--color--primary);
+    }
+  }
+}

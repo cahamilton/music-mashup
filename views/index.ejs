@@ -1,11 +1,20 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<!doctype html>
+<!--[if lt IE 9]>      <html lang="en" dir="ltr" class="no-js lt-ie10 lt-ie9"><![endif]-->
+<!--[if IE 9]>         <html lang="en" dir="ltr" class="no-js lt-ie10 ie9"><![endif]-->
+<!--[if gt IE 9]><!--> <html lang="en" dir="ltr" class="no-js"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title><%= title %></title>
+
+  <link rel="stylesheet" href="<%= asset.basePath %>stylesheets/mashup.css">
+  <link rel="apple-touch-icon" href="<%= asset.basePath %>apple-touch-icon.png">
+</head>
+
+<body>
+  <div id="musicMashup"></div>
+  <script type="text/javascript" src="<%= asset.basePath %>scripts/mashup.js"></script>
+</body>
 </html>

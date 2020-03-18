@@ -1,0 +1,35 @@
+/* Alternative Toggle */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.header {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.name,
+.genre {
+  display: block;
+  margin: 0 auto;
+  background: #000;
+  color: #fff;
+  text-align: center;
+
+  @media (--med) {
+    text-align: left;
+  }
+}
+
+.name {
+  padding: 0 1rem;
+  line-height: 1.75;
+}
+
+.genre {
+  padding: 0 2rem;
+  line-height: 2;
+
+  @media (--med) {
+    display: inline-block;
+    padding-right: 4rem;
+  }
+}

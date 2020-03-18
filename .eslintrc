@@ -1,8 +1,15 @@
 {
-  "extends": "google",
-  "globals": {
-    "describe": false,
-    "it": false
+  "extends": [
+    "airbnb",
+    "prettier"
+  ],
+  "env": {
+    "browser": true,
+    "node": true,
+    "jest": true
   },
-  "rules": {}
+  "globals": {
+    "window": false,
+    "document": false
+  }
 }

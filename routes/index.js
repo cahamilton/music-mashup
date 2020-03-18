@@ -1,9 +1,16 @@
-var express = require('express');
-var router = express.Router();
+/** @format */
 
-router.get('/', function(req, res, next) {
+const express = require('express');
+
+const router = express.Router();
+
+router.get('/', (req, res) => {
   res.render('index', {
-    title: 'Music Mashup'
+    title: 'MusicMashup - Your tasteful resource for music knowledge!',
+    asset: {
+      basePath:
+        process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
+    },
   });
 });
 

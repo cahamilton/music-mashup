@@ -1,93 +1,93 @@
-var config = require('../../config');
+/** @format */
 
-var LastFmNode = require('lastfm').LastFmNode;
-var lastfm = new LastFmNode({
-  api_key: config.keys.lastFM.key,
-  secret: config.keys.lastFM.secret
+const { LastFmNode } = require('lastfm');
+
+const lastfm = new LastFmNode({
+  api_key: process.env.LAST_FM_KEY,
+  secret: process.env.LAST_FM_SECRET,
 });
 
-var search = {};
+const search = {};
 
 /**
  * Function to query LastFM API for artist matches
  * @param {String} artistName - Artist to search for
- * @param {Function} callback - Callback function to pass to handlers
  */
-search.artist = function(artistName, callback) {
-  lastfm.request('artist.search', {
-    artist: artistName,
-    handlers: {
-      success: function(results) {
-        search.artist.successHandler(results, callback);
+search.artist = (artistName) => {
+  return new Promise((resolve, reject) => {
+    lastfm.request('artist.search', {
+      artist: artistName,
+      handlers: {
+        success: (results) => resolve(search.artist.successHandler(results)),
+        error: (error) => reject(search.artist.errorHandler(error)),
       },
-      error: function(error) {
-        search.artist.errorHandler(error, callback);
-      }
-    }
+    });
   });
 };
 
 /**
  * Success handler for search.artist() function
  * @param {Object} data - Object of data from LastFM API call
- * @param {Function} callback - Callback function
  * @return {Object} results - Newly formatted results object
  */
-search.artist.successHandler = function(data, callback) {
-  var searchQuery = data.results['opensearch:Query'].searchTerms;
-  var searchMatches = data.results.artistmatches.artist;
+search.artist.successHandler = (data) => {
+  const query = data.results['opensearch:Query'].searchTerms;
+  const artists = search.artist.filterMatches(
+    data.results.artistmatches.artist,
+  );
+  const matches = artists.map((artist) => search.artist.formatData(artist));
 
-  var results = {};
-  results.query = searchQuery;
-  results.matches = [];
-
-  searchMatches.forEach(function(match) {
-    // Sieve out bad artist data and only return results that contain a
-    // valid MusicBrainz ID
-    if (match.mbid) {
-      var artistData = search.artist.formatData(match);
-      results.matches.push(artistData);
-    }
-  });
-
-  callback(results);
-  return results;
+  return { query, matches };
 };
 
 /**
  * Error handler for search.artist() function
  * @param {Object} error - Object of error data from LastFM API call
- * @param {Function} callback - Callback function
  * @return {Object} error - Object of error data
  */
-search.artist.errorHandler = function(error, callback) {
-  callback(error);
-  return error;
-};
+search.artist.errorHandler = (error) => ({ error: error.message });
 
 /**
  * Returns formatted artist data from LastFM search matches
  * @param {Object} data - Object of artist data returned from LastFM API call
  * @return {Object} artist - Newly formatted object of artist data
  */
-search.artist.formatData = function(data) {
-  var artist = {};
-  artist.name = data.name;
-  artist.mbid = data.mbid;
+search.artist.formatData = (data) => {
+  const normal = data.image[0]['#text'];
+  const retina = data.image[1]['#text'];
 
-  var thumbnailNormal = data.image[0]['#text'];
-  var thumbnailRetina = data.image[1]['#text'];
+  return JSON.parse(
+    JSON.stringify({
+      name: data.name,
+      mbid: data.mbid,
+      thumbnail:
+        normal || retina
+          ? {
+              '1x': normal || undefined,
+              '2x': retina || undefined,
+            }
+          : undefined,
+    }),
+  );
+};
 
-  if (thumbnailNormal !== '') {
-    artist.thumbnail = {};
-    artist.thumbnail['1x'] = thumbnailNormal;
+/**
+ * Return filtered artists matches - only return items with a valid and unique MusicBrainz ID
+ * @param {Array} matches - Array of artist matches
+ * @returns {Array}
+ */
+search.artist.filterMatches = (matches) => {
+  const mbids = [];
 
-    if (thumbnailRetina !== '') {
-      artist.thumbnail['2x'] = thumbnailRetina;
-    }
-  }
-
-  return artist;
+  return matches
+    .filter((artist) => artist.mbid)
+    .filter((artist) => {
+      if (mbids.includes(artist.mbid)) {
+        return false;
+      }
+      mbids.push(artist.mbid);
+      return true;
+    });
 };
 
 module.exports = search;
