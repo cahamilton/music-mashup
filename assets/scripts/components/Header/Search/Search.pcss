@@ -27,9 +27,9 @@
   }
 
   &[disabled] {
-    color: #fff;
-    background: color(var(--color--primary) lightness(25%));
-    border-color: color(var(--color--primary) lightness(25%));
+    color: var(--color--secondary);
+    background: color-mod(var(--color--primary) lightness(25%));
+    border-color: color-mod(var(--color--primary) lightness(25%));
   }
 }
 
@@ -50,7 +50,7 @@
     &:hover,
     &:focus,
     &[disabled] {
-      color: color(var(--color--primary) lightness(25%));
+      color: color-mod(var(--color--primary) lightness(25%));
       outline: 0;
     }
 

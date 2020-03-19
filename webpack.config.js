@@ -1,17 +1,19 @@
+/** @format */
+
 const path = require('path');
 const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
   context: path.join(__dirname, '/assets/'),
   entry: {
-    mashup: [
-      './scripts/index',
-    ],
+    mashup: ['./scripts/index'],
   },
   output: {
     path: path.join(__dirname, '/public/'),
-    publicPath: process.env.NODE_ENV === 'production' ? '/' : 'http://localhost:8080/',
+    publicPath: isProduction ? '/' : 'http://localhost:8080/',
     filename: './scripts/[name].js',
     chunkFilename: './scripts/[name].[chunkhash].js',
   },
@@ -28,39 +30,37 @@ module.exports = {
       {
         test: /\.(js|jsx)$/,
         exclude: /node_modules/,
-        use: [
-          'babel-loader',
-        ],
+        use: ['babel-loader'],
       },
       {
         test: /\.(css|pcss)$/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                modules: true,
-                importLoaders: 1,
-                localIdentName: '[hash:base64:6]',
-                sourceMap: true,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              importLoaders: 1,
+              sourceMap: true,
+              modules: {
+                localIdentName: isProduction
+                  ? '[hash:base64]'
+                  : '[name]__[local]',
               },
             },
-            {
-              loader: 'postcss-loader',
-              options: {
-                sourceMap: true,
-              },
+          },
+          {
+            loader: 'postcss-loader',
+            options: {
+              sourceMap: true,
             },
-          ],
-        }),
+          },
+        ],
       },
       {
         test: /\.svg/,
-        use: [
-          'url-loader',
-          'svgo-loader',
-        ],
+        use: ['url-loader', 'svgo-loader'],
       },
     ],
   },
@@ -68,10 +68,15 @@ module.exports = {
     new webpack.NamedModulesPlugin(),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map',
-      exclude: ['./scripts/mashup.js'],
+      exclude: './scripts/mashup.js',
     }),
-    new ExtractTextPlugin({
-      filename: './stylesheets/mashup.css',
+    new MiniCssExtractPlugin({
+      filename: isProduction
+        ? './stylesheets/[name].[hash].css'
+        : './stylesheets/[name].css',
+      chunkFilename: isProduction
+        ? './stylesheets/[id].[hash].css'
+        : './stylesheets/[id].css',
     }),
   ],
   resolve: {

@@ -1,13 +1,19 @@
-const cssimport = require('postcss-import');
-const cssnext = require('postcss-cssnext');
-const precss = require('precss');
+/** @format */
 
+const cssimport = require('postcss-import');
+const postcssPresetEnv = require('postcss-preset-env');
+const postcssColorMod = require('postcss-color-mod-function');
+
+//
+// TODO: Replace color-mod plugin, removed from Color Module Level 4 specification.
+//
 module.exports = {
   plugins: [
     cssimport(),
-    precss(),
-    cssnext({
-      browsers: ['last 5 versions'],
+    postcssPresetEnv({
+      stage: 0,
+      preserve: false,
     }),
+    postcssColorMod(),
   ],
 };
