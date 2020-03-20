@@ -3,13 +3,7 @@
 const { MusicBrainzApi } = require('musicbrainz-api');
 
 const logger = require('../../../logger');
-const { author, name, version } = require('../../../package.json');
-
-const musicBrainz = new MusicBrainzApi({
-  appName: name,
-  appVersion: version,
-  appContactInfo: author,
-});
+const musicBrainzConfig = require('../config/musicBrainz');
 
 /**
  * Get YouTube username from MusicBrainz ID
@@ -17,8 +11,10 @@ const musicBrainz = new MusicBrainzApi({
  * @return {Promise<string|boolean>}
  */
 const getYouTubeUserName = async (id) => {
+  const musicBrainzApi = new MusicBrainzApi(musicBrainzConfig);
+
   try {
-    const artist = await musicBrainz.getArtist(id, ['url-rels']);
+    const artist = await musicBrainzApi.getArtist(id, ['url-rels']);
 
     const youtube = artist.relations.find(
       (relation) => relation.type === 'youtube',
