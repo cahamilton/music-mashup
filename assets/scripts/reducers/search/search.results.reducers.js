@@ -3,6 +3,7 @@
 import { combineReducers } from 'redux';
 
 import {
+  SEARCH_QUERY_UPDATE,
   SEARCH_RESULTS_MATCHES_UPDATE,
   SEARCH_RESULTS_VISIBLE_TOGGLE,
 } from '../../actions/search/search.actions';
@@ -24,6 +25,8 @@ export const visible = (state = false, action) => {
   switch (type) {
     case SEARCH_RESULTS_VISIBLE_TOGGLE:
       return !state;
+    case SEARCH_QUERY_UPDATE:
+      return false;
     default:
       return state;
   }

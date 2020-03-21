@@ -7,7 +7,7 @@ const info = (state = {}, action) => {
 
   switch (type) {
     case INFO_UPDATE:
-      return { ...state, ...payload };
+      return payload;
     default:
       return state;
   }
