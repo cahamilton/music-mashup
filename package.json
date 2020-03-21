@@ -106,7 +106,9 @@
     "collectCoverage": true,
     "collectCoverageFrom": [
       "**/assets/**/*.{js,jsx}",
+      "**/helpers/**/*.{js,jsx}",
       "**/routes/**/*.{js,jsx}",
+      "**/utilities/**/*.{js,jsx}",
       "!**/container/**",
       "!**/coverage/**",
       "!**/public/**"
