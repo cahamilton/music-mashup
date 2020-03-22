@@ -1,8 +1,9 @@
 /** @format */
 
 const express = require('express');
-const search = require('./api/search');
+
 const info = require('./api/info');
+const search = require('./api/search');
 const videos = require('./api/videos');
 
 const router = express.Router();
@@ -10,16 +11,8 @@ const router = express.Router();
 router.get('/search/', search);
 router.get('/search/:artistName', search);
 
-router.get('/info/', (req, res) => {
-  res.status(404).json({ error: 'Missing musicBrainzID parameter' });
-});
-
-router.get('/info/:musicBrainzID', (req, res) => {
-  info
-    .mbid(req.params.musicBrainzID)
-    .then((results) => res.json(results))
-    .catch((error) => res.status(500).json(error));
-});
+router.get('/info/', info);
+router.get('/info/:musicBrainzID', info);
 
 router.get('/videos/', videos);
 router.get('/videos/:musicBrainzID', videos);
