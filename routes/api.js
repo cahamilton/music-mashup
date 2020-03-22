@@ -7,16 +7,8 @@ const videos = require('./api/videos');
 
 const router = express.Router();
 
-router.get('/search/', (req, res) => {
-  res.status(404).json({ error: 'Missing artistName parameter' });
-});
-
-router.get('/search/:artistName', (req, res) => {
-  search
-    .artist(req.params.artistName)
-    .then((results) => res.json(results))
-    .catch((error) => res.status(500).json(error));
-});
+router.get('/search/', search);
+router.get('/search/:artistName', search);
 
 router.get('/info/', (req, res) => {
   res.status(404).json({ error: 'Missing musicBrainzID parameter' });

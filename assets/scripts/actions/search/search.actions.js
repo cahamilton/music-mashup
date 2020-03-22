@@ -58,7 +58,7 @@ export const searchByArtistMbid = (mbid) => (dispatch) => {
   return fetch(url)
     .then((response) => response.json())
     .then((response) => {
-      dispatch(infoUpdate(response));
+      dispatch(infoUpdate(response.data));
     })
     .catch((error) => {
       // TODO: Add logger
@@ -83,12 +83,10 @@ export const searchByArtistName = (artist) => (dispatch) => {
   return fetch(url)
     .then((response) => response.json())
     .then((response) => {
-      const { query, matches } = response;
+      const { query, matches } = response.data;
       dispatch(searchQueryUpdate(query));
       dispatch(searchResultsMatchesUpdate(matches));
-
-      const match = matches[0];
-      dispatch(searchByArtistMbid(match.mbid));
+      dispatch(searchByArtistMbid(matches[0].mbid));
     })
     .catch((error) => {
       // TODO: Add logger
