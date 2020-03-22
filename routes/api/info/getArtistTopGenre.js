@@ -4,10 +4,12 @@ const toTitleCase = require('../../../utilities/toTitleCase');
 
 /**
  * Return top genre for an Artist
- * @param {Array} genres - Array of genres returned from MusicBrainz API
+ * @param {Object} mbArtist - MusicBrainz Artist Entity
  * @return {String|null}
  */
-const getArtistTopGenre = (genres) => {
+const getArtistTopGenre = (mbArtist) => {
+  const { genres } = mbArtist;
+
   if (!genres.length) {
     return null;
   }
