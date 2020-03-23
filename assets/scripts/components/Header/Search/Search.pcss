@@ -28,8 +28,8 @@
 
   &[disabled] {
     color: var(--color--secondary);
-    background: color-mod(var(--color--primary) lightness(25%));
-    border-color: color-mod(var(--color--primary) lightness(25%));
+    background: var(--color-loading);
+    border-color: var(--color-loading);
   }
 }
 
@@ -50,7 +50,7 @@
     &:hover,
     &:focus,
     &[disabled] {
-      color: color-mod(var(--color--primary) lightness(25%));
+      color: var(--color-loading);
       outline: 0;
     }
 

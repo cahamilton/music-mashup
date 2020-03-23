@@ -1,0 +1,107 @@
+/* ArtistBiography */
+@import '../../../stylesheets/config/settings.pcss';
+
+.container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: color-mod(var(--color--secondary) alpha(75%));
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 100;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bars {
+  align-items: flex-end;
+  display: flex;
+  width: 1.25em;
+  height: 1em;
+  overflow: hidden;
+  margin: 0 auto -0.25em auto;
+}
+
+.column {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  margin-right: 0.0625em;
+}
+
+.bar {
+  animation-name: loading;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  background-color: var(--color-loading);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
+  will-change: transform;
+}
+
+.bar11 {
+  composes: bar;
+  animation-duration: 0.3s;
+}
+
+.bar12 {
+  composes: bar;
+  animation-duration: 0.45s;
+}
+
+.bar21 {
+  composes: bar;
+  animation-duration: 0.5s;
+}
+
+.bar22 {
+  composes: bar;
+  animation-duration: 0.4s;
+}
+
+.bar31 {
+  composes: bar;
+  animation-duration: 0.3s;
+}
+
+.bar32 {
+  composes: bar;
+  animation-duration: 0.35s;
+}
+
+.bar41 {
+  composes: bar;
+  animation-duration: 0.4s;
+}
+
+.bar42 {
+  composes: bar;
+  animation-duration: 0.25s;
+}
+
+.text {
+  color: var(--color-loading);
+  font-size: 0.75em;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: -0.05em;
+}
+
+@keyframes loading {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
