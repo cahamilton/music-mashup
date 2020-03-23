@@ -1,0 +1,37 @@
+/* ArtistHeader */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.container {
+  position: relative;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.title {
+  display: block;
+  margin: 0 auto;
+  background: var(--color--primary);
+  color: var(--color--secondary);
+  text-align: center;
+
+  @media (--med) {
+    text-align: left;
+  }
+}
+
+.name {
+  composes: title;
+  padding: 0 1rem;
+  line-height: 1.75;
+}
+
+.genre {
+  composes: title;
+  padding: 0 2rem;
+  line-height: 2;
+
+  @media (--med) {
+    display: inline-block;
+    padding-right: 4rem;
+  }
+}
