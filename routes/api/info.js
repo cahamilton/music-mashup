@@ -3,6 +3,7 @@
 const status = require('http-status-codes');
 const { MusicBrainzApi } = require('musicbrainz-api');
 
+const getArtistRelation = require('./info/getArtistRelation');
 const getArtistTopGenre = require('./info/getArtistTopGenre');
 const isProduction = require('../../helpers/isProduction');
 const logger = require('../../logger');
@@ -38,6 +39,9 @@ const info = async (req, res) => {
         name: mbArtist.name,
         mbid: mbArtist.id,
         genre: artistTopGenre,
+        relations: {
+          wikidata: getArtistRelation(mbArtist, 'wikidata'),
+        },
       },
     });
   } catch (error) {
