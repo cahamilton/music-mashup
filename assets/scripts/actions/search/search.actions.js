@@ -1,5 +1,7 @@
 /** @format */
 
+import { get } from 'axios';
+
 import { biographySearch } from '../biography/biography.actions';
 import { infoUpdate } from '../info/info.actions';
 
@@ -49,56 +51,56 @@ export const searchResultsVisibleToggle = () => ({
 /**
  * Trigger Search by MusicBrainz ID
  * @param musicBrainzId
- * @returns {function(*): Promise<any>}
+ * @return {function(*): Promise<void>}
  */
 export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
   dispatch(searchPending());
 
-  const url = `/api/info/${musicBrainzId}`;
+  return (async () => {
+    const url = `/api/info/${musicBrainzId}`;
 
-  return fetch(url)
-    .then((response) => response.json())
-    .then((response) => response.data)
-    .then((response) => {
-      const { wikidata } = response.relations;
-      dispatch(infoUpdate(response));
+    try {
+      const response = await get(url);
+      const { data } = response.data;
+      const { wikidata } = data.relations;
+
+      dispatch(infoUpdate(data));
       dispatch(biographySearch(musicBrainzId, wikidata));
-    })
-    .catch((error) => {
+    } catch (error) {
       // TODO: Add logger
       // eslint-disable-next-line no-console
-      console.error(error);
-    })
-    .finally(() => {
+      console.log(error);
+    } finally {
       dispatch(searchPending());
-    });
+    }
+  })();
 };
 
 /**
  * Trigger Search by Artist name
  * @param artist
- * @returns {function(*): Promise<any>}
+ * @returns {function(*): Promise<void>}
  */
 export const searchByArtistName = (artist) => (dispatch) => {
   dispatch(searchPending());
 
-  const url = `/api/search/${encodeURIComponent(artist)}`;
+  return (async () => {
+    const url = `/api/search/${encodeURIComponent(artist)}`;
 
-  return fetch(url)
-    .then((response) => response.json())
-    .then((response) => response.data)
-    .then((response) => {
-      const { query, matches } = response;
+    try {
+      const response = await get(url);
+      const { data } = response.data;
+      const { query, matches } = data;
+
       dispatch(searchQueryUpdate(query));
       dispatch(searchResultsMatchesUpdate(matches));
       dispatch(searchByArtistMbid(matches[0].mbid));
-    })
-    .catch((error) => {
+    } catch (error) {
       // TODO: Add logger
       // eslint-disable-next-line no-console
-      console.error(error);
-    })
-    .finally(() => {
+      console.log(error);
+    } finally {
       dispatch(searchPending());
-    });
+    }
+  })();
 };

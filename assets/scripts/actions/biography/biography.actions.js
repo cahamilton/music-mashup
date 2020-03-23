@@ -27,7 +27,7 @@ export const biographyUpdate = (payload = {}) => ({
  * Trigger search for artist biography
  * @param {string} musicBrainzId - Artist MusicBrainz ID
  * @param {string} source - Relationship URL
- * @returns {function(*): Promise<any>}
+ * @returns {function(*): Promise<void>}
  */
 export const biographySearch = (musicBrainzId, source) => (dispatch) => {
   dispatch(biographyPending());
@@ -43,6 +43,7 @@ export const biographySearch = (musicBrainzId, source) => (dispatch) => {
     try {
       const response = await post(url, { source });
       const { data } = response.data;
+
       dispatch(biographyUpdate(data));
     } catch (error) {
       // TODO: Add logger
