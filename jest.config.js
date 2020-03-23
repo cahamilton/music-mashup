@@ -15,6 +15,9 @@ module.exports = {
     "lcov",
     "text-summary"
   ],
+  "setupFilesAfterEnv": [
+    "<rootDir>/enzyme.config.js"
+  ],
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
   },
