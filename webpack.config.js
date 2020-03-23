@@ -45,8 +45,8 @@ module.exports = {
               sourceMap: true,
               modules: {
                 localIdentName: isProduction
-                  ? '[hash:base64]'
-                  : '[name]__[local]',
+                  ? '[hash:base64:6]'
+                  : '[hash:base64:6]',
               },
             },
           },
