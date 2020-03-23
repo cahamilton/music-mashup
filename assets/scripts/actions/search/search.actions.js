@@ -1,5 +1,6 @@
 /** @format */
 
+import { biographySearch } from '../biography/biography.actions';
 import { infoUpdate } from '../info/info.actions';
 
 export const SEARCH_PENDING = 'SEARCH_PENDING';
@@ -47,18 +48,21 @@ export const searchResultsVisibleToggle = () => ({
 
 /**
  * Trigger Search by MusicBrainz ID
- * @param mbid
+ * @param musicBrainzId
  * @returns {function(*): Promise<any>}
  */
-export const searchByArtistMbid = (mbid) => (dispatch) => {
+export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
   dispatch(searchPending());
 
-  const url = `/api/info/${encodeURIComponent(mbid)}`;
+  const url = `/api/info/${musicBrainzId}`;
 
   return fetch(url)
     .then((response) => response.json())
+    .then((response) => response.data)
     .then((response) => {
-      dispatch(infoUpdate(response.data));
+      const { wikidata } = response.relations;
+      dispatch(infoUpdate(response));
+      dispatch(biographySearch(musicBrainzId, wikidata));
     })
     .catch((error) => {
       // TODO: Add logger
@@ -82,8 +86,9 @@ export const searchByArtistName = (artist) => (dispatch) => {
 
   return fetch(url)
     .then((response) => response.json())
+    .then((response) => response.data)
     .then((response) => {
-      const { query, matches } = response.data;
+      const { query, matches } = response;
       dispatch(searchQueryUpdate(query));
       dispatch(searchResultsMatchesUpdate(matches));
       dispatch(searchByArtistMbid(matches[0].mbid));
