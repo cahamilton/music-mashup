@@ -36,7 +36,7 @@ const biography = async (req, res) => {
     );
 
     if (!isProduction && debug) {
-      return res.status(status.OK).json(response);
+      return res.status(status.OK).json(response.data);
     }
 
     const { content_urls: content, extract, thumbnail } = response.data;
