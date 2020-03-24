@@ -20,7 +20,8 @@ const getWikipediaTitle = async (wikidataId) => {
         action: 'wbgetentities',
         format: 'json',
         ids: wikidataId,
-        props: 'sitelinks',
+        props: 'sitelinks/urls',
+        sitefilter: 'enwiki',
       },
     });
 

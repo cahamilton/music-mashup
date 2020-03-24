@@ -31,22 +31,34 @@ const biography = async (req, res) => {
   const wikipediaTitle = await getWikipediaTitle(wikidataId);
 
   try {
-    const response = await get(
-      `https://en.wikipedia.org/api/rest_v1/page/summary/${wikipediaTitle}`,
-    );
+    const response = await get(`https://en.wikipedia.org/w/api.php`, {
+      params: {
+        format: 'json',
+        action: 'query',
+        titles: wikipediaTitle,
+        prop: 'extracts|info|pageimages',
+        exintro: true,
+        explaintext: true,
+        inprop: 'url',
+        piprop: 'thumbnail',
+        pithumbsize: 700,
+      },
+    });
 
     if (!isProduction && debug) {
       return res.status(status.OK).json(response.data);
     }
 
-    const { content_urls: content, extract, thumbnail } = response.data;
+    const { pages } = response.data.query;
+    const firstPage = Object.keys(pages)[0];
+    const artist = pages[firstPage];
 
     return res.status(status.OK).json({
       error: false,
       data: {
-        extract,
-        image: thumbnail ? thumbnail.source : null,
-        source: content.desktop.page,
+        extract: artist.extract,
+        image: artist.thumbnail ? artist.thumbnail.source : null,
+        source: artist.fullurl,
       },
     });
   } catch (error) {
