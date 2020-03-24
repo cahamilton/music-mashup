@@ -1,0 +1,55 @@
+/* AlternativeItem */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.button {
+  display: inline-flex;
+  flex: 1 1 auto;
+  align-items: center;
+  border: 0;
+  border-radius: 0;
+  text-align: left;
+  color: var(--color--secondary);
+  font-size: 0.85rem;
+  padding: 0.75rem;
+  background: var(--color--primary);
+  line-height: inherit;
+
+  &:active {
+    background: var(--color--primary);
+    color: var(--color--secondary);
+  }
+
+  &:hover,
+  &:focus {
+    background: var(--color--secondary);
+    color: var(--color--primary);
+  }
+
+  @media (--med) {
+    font-size: 0.75rem;
+    padding: 0.85rem;
+  }
+}
+
+.image {
+  flex: 0 0 auto;
+  margin-right: 0.85rem;
+  width: 32px;
+  height: 32px;
+
+  @media (--med) {
+    margin-right: 0.75rem;
+  }
+}
+
+.info {
+  display: flex;
+  flex-flow: column;
+  flex: 1 1 auto;
+}
+
+.name {}
+
+.disambiguation {}
+
+

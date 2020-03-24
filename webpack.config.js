@@ -46,7 +46,7 @@ module.exports = {
               modules: {
                 localIdentName: isProduction
                   ? '[hash:base64:6]'
-                  : '[hash:base64:6]',
+                  : '[name]__[local]',
               },
             },
           },
