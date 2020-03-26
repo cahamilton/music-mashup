@@ -1,38 +1,21 @@
 /** @format */
 
-const { MusicBrainzApi } = require('musicbrainz-api');
-
-const logger = require('../../../logger');
-const musicBrainzConfig = require('../config/musicBrainz');
-
 /**
- * Get YouTube username from MusicBrainz ID
- * @param id
- * @return {Promise<string|boolean>}
+ * Retrieve YouTube username from URL string
+ * @param url
+ * @return {string|null}
  */
-const getYouTubeUserName = async (id) => {
-  const musicBrainzApi = new MusicBrainzApi(musicBrainzConfig);
+const getYouTubeUserName = (url) => {
+  const split = url.split('/');
+  const index = split.findIndex((item) => item === 'user');
 
-  try {
-    const artist = await musicBrainzApi.getArtist(id, ['url-rels']);
-
-    const youtube = artist.relations.find(
-      (relation) => relation.type === 'youtube',
-    );
-
-    if (!youtube) {
-      return false;
-    }
-
-    const url = youtube.url.resource;
-    const username = url.split('/user/')[1];
-
-    return username;
-  } catch (error) {
-    logger.error(error.message);
-
-    return false;
+  if (index === -1) {
+    return null;
   }
+
+  const username = split[index + 1];
+
+  return username;
 };
 
 module.exports = getYouTubeUserName;
