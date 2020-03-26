@@ -3,26 +3,7 @@
 const { get } = require('axios');
 
 const logger = require('../../../logger');
-
-/**
- * Format results returned from playlist search
- * @param {Array} items
- * @return {Object} results
- */
-const formatResults = (items) => {
-  return items.map((result) => {
-    const { resourceId, title, thumbnails } = result.snippet;
-
-    return {
-      id: resourceId.videoId,
-      title,
-      thumbnail: {
-        '1x': thumbnails.medium.url,
-        '2x': thumbnails.standard.url,
-      },
-    };
-  });
-};
+const getFormattedResults = require('./getFormattedResults');
 
 /**
  * Get playlist items from playlistId
@@ -52,7 +33,7 @@ const getYouTubePlaylistItems = async (playlistId) => {
     return {
       playlistId,
       nextPage: nextPageToken,
-      results: formatResults(items),
+      items: getFormattedResults(items),
     };
   } catch (error) {
     logger.error(error.message);
