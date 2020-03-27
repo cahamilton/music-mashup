@@ -1,6 +1,7 @@
 # music-mashup
 
 [![Build Status](https://travis-ci.org/cahamilton/music-mashup.svg?branch=develop)](https://travis-ci.org/cahamilton/music-mashup)
+[![Coverage Status](https://coveralls.io/repos/github/cahamilton/music-mashup/badge.svg?branch=develop)](https://coveralls.io/github/cahamilton/music-mashup?branch=develop) 
 
 Music Mashup - Your tasteful resource for music knowledge!
 
