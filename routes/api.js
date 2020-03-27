@@ -18,8 +18,8 @@ router.get('/search/:artistName', search);
 router.get('/info/', info);
 router.get('/info/:musicBrainzID', info);
 
-router.get('/videos/', videos);
-router.get('/videos/:musicBrainzID', videos);
+router.post('/videos/', videos);
+router.post('/videos/:musicBrainzID', videos);
 
 router.use((req, res) => {
   res.status(404).json({ error: 'Invalid API Method called' });

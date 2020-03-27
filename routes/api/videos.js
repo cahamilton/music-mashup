@@ -13,6 +13,7 @@ const getYouTubePlaylistItems = require('./videos/getYouTubePlaylistItems');
  */
 const videos = async (req, res) => {
   const { musicBrainzID } = req.params;
+  const { source } = req.body;
 
   if (!musicBrainzID) {
     return res.status(status.BAD_REQUEST).json({
@@ -21,7 +22,7 @@ const videos = async (req, res) => {
     });
   }
 
-  const username = await getYouTubeUserName(musicBrainzID);
+  const username = getYouTubeUserName(source);
 
   if (!username) {
     return res.status(status.OK).json({

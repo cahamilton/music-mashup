@@ -41,6 +41,7 @@ const info = async (req, res) => {
         genre: artistTopGenre,
         relations: {
           wikidata: getArtistRelation(mbArtist, 'wikidata'),
+          youtube: getArtistRelation(mbArtist, 'youtube'),
         },
       },
     });
