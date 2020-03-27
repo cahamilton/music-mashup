@@ -1,5 +1,7 @@
 # music-mashup
 
+[![Build Status](https://travis-ci.org/cahamilton/music-mashup.svg?branch=develop)](https://travis-ci.org/cahamilton/music-mashup)
+
 Music Mashup - Your tasteful resource for music knowledge!
 
 ## What's it all about?
