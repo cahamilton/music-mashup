@@ -36,7 +36,7 @@ const getYouTubePlaylistItems = async (playlistId) => {
       items: getFormattedResults(items),
     };
   } catch (error) {
-    logger.error(error.message);
+    logger.error(error);
 
     return false;
   }
