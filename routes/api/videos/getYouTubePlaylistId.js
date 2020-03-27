@@ -29,9 +29,11 @@ const getYouTubePlaylistId = async (username) => {
       return false;
     }
 
-    return items[0].contentDetails.relatedPlaylists.uploads;
+    const { uploads } = items[0].contentDetails.relatedPlaylists;
+
+    return uploads;
   } catch (error) {
-    logger.error(error.message);
+    logger.error(error);
 
     return false;
   }
