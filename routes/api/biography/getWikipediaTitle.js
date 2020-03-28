@@ -29,7 +29,7 @@ const getWikipediaTitle = async (wikidataId) => {
 
     return title;
   } catch (error) {
-    logger.error(error.message);
+    logger.error(error);
 
     return null;
   }

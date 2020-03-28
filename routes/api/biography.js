@@ -3,6 +3,7 @@
 const status = require('http-status-codes');
 const { get } = require('axios');
 
+const getFormattedResults = require('./biography/getFormattedResults');
 const getWikidataId = require('./biography/getWikidataId');
 const getWikipediaTitle = require('./biography/getWikipediaTitle');
 const isProduction = require('../../helpers/isProduction');
@@ -49,20 +50,12 @@ const biography = async (req, res) => {
       return res.status(status.OK).json(response.data);
     }
 
-    const { pages } = response.data.query;
-    const firstPage = Object.keys(pages)[0];
-    const artist = pages[firstPage];
-
     return res.status(status.OK).json({
       error: false,
-      data: {
-        extract: artist.extract,
-        image: artist.thumbnail ? artist.thumbnail.source : null,
-        source: artist.fullurl,
-      },
+      data: getFormattedResults(response.data),
     });
   } catch (error) {
-    logger.error(error.message);
+    logger.error(error);
 
     return res.status(status.OK).json({
       error: true,
