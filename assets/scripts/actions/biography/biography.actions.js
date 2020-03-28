@@ -34,7 +34,8 @@ export const biographySearch = (musicBrainzId, source) => (dispatch) => {
 
   if (!source) {
     // Clear any existing content
-    return dispatch(biographyUpdate());
+    dispatch(biographyUpdate());
+    return false;
   }
 
   return (async () => {
