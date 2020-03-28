@@ -1,76 +1,40 @@
-import React, { Component } from 'react';
+/** @format */
+
+import React, { useRef } from 'react';
 import PropTypes from 'prop-types';
 
 import styles from '../Search/Search.pcss';
 
-class SearchForm extends Component {
+const SearchForm = ({ isLoading, onFormSubmit }) => {
+  const refInput = useRef(null);
 
-  static inputFocusHandler(event) {
+  const inputFocusHandler = (event) => {
     event.target.select();
-  }
+  };
 
-  constructor(props) {
-    super(props);
-
-    this.state = { query: '' };
-
-    this.inputChangeHandler = this.inputChangeHandler.bind(this);
-    this.formSubmitHandler = this.formSubmitHandler.bind(this);
-  }
-
-  inputChangeHandler(event) {
-    const {
-      value: query,
-    } = event.target;
-
-    this.setState({ query });
-  }
-
-  formSubmitHandler(event) {
-    const {
-      query,
-    } = this.state;
-
-    const {
-      onFormSubmit,
-    } = this.props;
-
+  const formSubmitHandler = (event) => {
     event.preventDefault();
+    onFormSubmit(refInput.current.value);
+  };
 
-    onFormSubmit(query);
-  }
-
-  render() {
-    const {
-      isLoading,
-    } = this.props;
-
-    return (
-      <form
-        className={styles.form}
-        onSubmit={this.formSubmitHandler}
-      >
-        <input
-          autoComplete="off"
-          className={styles.input}
-          disabled={isLoading}
-          onChange={this.inputChangeHandler}
-          onFocus={SearchForm.inputFocusHandler}
-          placeholder="Search for an Artist..."
-          required
-          type="text"
-        />
-        <button
-          className={styles.button}
-          disabled={isLoading}
-          type="submit"
-        >
-          Go
-        </button>
-      </form>
-    );
-  }
-}
+  return (
+    <form className={styles.form} onSubmit={formSubmitHandler}>
+      <input
+        autoComplete="off"
+        className={styles.input}
+        disabled={isLoading}
+        onFocus={inputFocusHandler}
+        placeholder="Search for an Artist..."
+        ref={refInput}
+        required
+        type="text"
+      />
+      <button className={styles.button} disabled={isLoading} type="submit">
+        Go
+      </button>
+    </form>
+  );
+};
 
 SearchForm.propTypes = {
   isLoading: PropTypes.bool,
