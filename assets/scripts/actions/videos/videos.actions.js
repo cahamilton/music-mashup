@@ -34,7 +34,8 @@ export const videosSearch = (musicBrainzId, source) => (dispatch) => {
 
   if (!source) {
     // Clear any existing content
-    return dispatch(videosUpdate());
+    dispatch(videosUpdate());
+    return false;
   }
 
   return (async () => {

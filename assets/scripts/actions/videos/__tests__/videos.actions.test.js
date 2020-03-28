@@ -1,11 +1,16 @@
 /** @format */
 
+import { post } from 'axios';
+
 import {
   VIDEOS_PENDING,
   VIDEOS_UPDATE,
   videosPending,
+  videosSearch,
   videosUpdate,
 } from '../videos.actions';
+
+jest.mock('axios');
 
 describe('videos.actions', () => {
   describe('videosPending', () => {
@@ -29,12 +34,47 @@ describe('videos.actions', () => {
   });
 
   describe('videosSearch', () => {
-    it.todo('should call videosPending once');
+    const dispatch = jest.fn();
 
-    it.todo('should call videosUpdate (with no params), if no source');
+    afterEach(() => {
+      jest.resetAllMocks();
+    });
 
-    it.todo('should call videosUpdate (with response data), if successful');
+    it('should call videosPending', async () => {
+      const action = videosPending();
 
-    it.todo('should call logger if an error occurs');
+      expect(dispatch).not.toHaveBeenCalled();
+      await videosSearch('mbid', '')(dispatch);
+      expect(dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should call videosUpdate and return (if no source)', async () => {
+      const action = videosUpdate();
+
+      expect(dispatch).not.toHaveBeenCalled();
+      const actual = await videosSearch('mbid', '')(dispatch);
+      expect(actual).toEqual(false);
+      expect(dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should call videosUpdate (with response data)', async () => {
+      const response = { error: false, data: { videos: [] } };
+      const action = videosUpdate(response.data);
+      post.mockResolvedValue({ data: response });
+
+      expect(dispatch).not.toHaveBeenCalled();
+      await videosSearch('mbid', 'sourceURL')(dispatch);
+      expect(dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should call console log if theres an error', async () => {
+      const spy = jest.spyOn(global.console, 'log');
+      const error = { error: 'An error occurred' };
+      post.mockRejectedValue(error);
+
+      expect(spy).not.toHaveBeenCalled();
+      await videosSearch('mbid', 'sourceURL')(dispatch);
+      expect(spy).toHaveBeenCalledWith(error);
+    });
   });
 });
