@@ -22,6 +22,13 @@ const videos = async (req, res) => {
     });
   }
 
+  if (!source) {
+    return res.status(status.BAD_REQUEST).json({
+      error: true,
+      message: 'Missing source body parameter',
+    });
+  }
+
   const username = getYouTubeUserName(source);
 
   if (!username) {
