@@ -7,3 +7,4 @@ node_js:
 script:
   - "yarn run test"
   - "yarn run coverage"
+  - "yarn run webpack"
