@@ -18,7 +18,7 @@ const getYouTubePlaylistItems = async (playlistId) => {
         params: {
           key: process.env.YOUTUBE_KEY,
           part: 'snippet',
-          maxResults: 5,
+          maxResults: 6,
           playlistId,
         },
       },
