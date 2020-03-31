@@ -2,20 +2,39 @@
 
 import deepFreeze from 'deep-freeze';
 
-import results from '../videos.results.reducers';
+import results, { initialState } from '../videos.results.reducers';
 import { VIDEOS_UPDATE } from '../../../actions/videos/videos.actions';
 
 describe('videos.reducers', () => {
   describe('results', () => {
     it('should return default value', () => {
-      const initialState = undefined;
       const action = { type: 'RANDOM' };
-      const actual = results(initialState, action);
-      expect(actual).toEqual({});
+      const actual = results(undefined, action);
+      expect(actual).toEqual(initialState);
+    });
+
+    it('should return default value if empty payload', () => {
+      const state = deepFreeze({
+        playlistId: 'UUi2KNss4Yx73NG0JARSFe0A',
+        nextPage: 'CAUQAA',
+        items: [
+          {
+            id: 'PdDpbKX-N-4',
+            title: 'Cal Jam 18 - More Good Times!',
+            thumbnail: { '1x': 'image-1-1x.jpg', '2x': 'image-1-2x.jpg' },
+          },
+        ],
+      });
+      const action = deepFreeze({
+        type: VIDEOS_UPDATE,
+        payload: {},
+      });
+      const actual = results(state, action);
+      expect(actual).toEqual(initialState);
     });
 
     it('should return state that matches payload', () => {
-      const initialState = deepFreeze({
+      const state = deepFreeze({
         playlistId: 'UUi2KNss4Yx73NG0JARSFe0A',
         nextPage: 'CAUQAA',
         items: [
@@ -45,7 +64,7 @@ describe('videos.reducers', () => {
           ],
         },
       });
-      const actual = results(initialState, action);
+      const actual = results(state, action);
       expect(actual).toEqual(action.payload);
     });
   });
