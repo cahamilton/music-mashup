@@ -40,14 +40,6 @@ describe('videos.actions', () => {
       jest.resetAllMocks();
     });
 
-    it('should call videosPending', async () => {
-      const action = videosPending();
-
-      expect(dispatch).not.toHaveBeenCalled();
-      await videosSearch('mbid', '')(dispatch);
-      expect(dispatch).toHaveBeenCalledWith(action);
-    });
-
     it('should call videosUpdate and return (if no source)', async () => {
       const action = videosUpdate();
 
@@ -55,6 +47,26 @@ describe('videos.actions', () => {
       const actual = await videosSearch('mbid', '')(dispatch);
       expect(actual).toEqual(false);
       expect(dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should call videosUpdate and return (if no musicBrainzId)', async () => {
+      const action = videosUpdate();
+
+      expect(dispatch).not.toHaveBeenCalled();
+      const actual = await videosSearch('', 'sourceURL')(dispatch);
+      expect(actual).toEqual(false);
+      expect(dispatch).toHaveBeenCalledWith(action);
+    });
+
+    it('should call videosPending (as first and last action)', async () => {
+      const response = { error: false, data: { videos: [] } };
+      const action = videosPending();
+      post.mockResolvedValue({ data: response });
+
+      expect(dispatch).not.toHaveBeenCalled();
+      await videosSearch('mbid', 'sourceURL')(dispatch);
+      expect(dispatch).toHaveBeenNthCalledWith(1, action);
+      expect(dispatch).toHaveBeenLastCalledWith(action);
     });
 
     it('should call videosUpdate (with response data)', async () => {

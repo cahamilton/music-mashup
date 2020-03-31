@@ -30,13 +30,12 @@ export const videosUpdate = (payload = {}) => ({
  * @returns {function(*): Promise<void>}
  */
 export const videosSearch = (musicBrainzId, source) => (dispatch) => {
-  dispatch(videosPending());
-
-  if (!source) {
-    // Clear any existing content
+  if (!musicBrainzId || !source) {
     dispatch(videosUpdate());
     return false;
   }
+
+  dispatch(videosPending());
 
   return (async () => {
     const url = `/api/videos/${musicBrainzId}`;
@@ -50,6 +49,8 @@ export const videosSearch = (musicBrainzId, source) => (dispatch) => {
       // TODO: Add logger
       // eslint-disable-next-line no-console
       console.log(error);
+    } finally {
+      dispatch(videosPending());
     }
   })();
 };
