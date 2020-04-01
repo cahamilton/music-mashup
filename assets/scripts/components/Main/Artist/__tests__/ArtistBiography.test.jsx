@@ -5,6 +5,7 @@ import { shallow } from 'enzyme';
 
 import ArtistBiography from '../ArtistBiography';
 import ContentBlock from '../../../ContentBlock/ContentBlock';
+import Source from '../../../Source/Source';
 
 describe('ArtistBiography', () => {
   const extract = 'This band is awesome';
@@ -23,7 +24,7 @@ describe('ArtistBiography', () => {
 
   it('should render source', () => {
     const wrapper = shallow(<ArtistBiography source={source} />);
-    expect(wrapper.find('.source')).toHaveLength(1);
+    expect(wrapper.find(Source)).toHaveLength(1);
   });
 
   it('should render image', () => {
