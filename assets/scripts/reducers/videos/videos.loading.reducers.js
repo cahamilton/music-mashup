@@ -1,6 +1,9 @@
 /** @format */
 
-import { VIDEOS_PENDING } from '../../actions/videos/videos.actions';
+import {
+  VIDEOS_PENDING,
+  VIDEOS_UPDATE,
+} from '../../actions/videos/videos.actions';
 
 const loading = (state = false, action) => {
   const { type } = action;
@@ -8,6 +11,8 @@ const loading = (state = false, action) => {
   switch (type) {
     case VIDEOS_PENDING:
       return !state;
+    case VIDEOS_UPDATE:
+      return false;
     default:
       return state;
   }

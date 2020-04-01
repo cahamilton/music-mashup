@@ -26,29 +26,30 @@ export const videosUpdate = (payload = {}) => ({
 
 /**
  * Trigger search for artist videos
- * @param {string} musicBrainzId - Artist MusicBrainz ID
- * @param {string} source - Relationship URL
  * @returns {function(*): Promise<void>}
  */
-export const videosSearch = (musicBrainzId, source) => (dispatch) => {
+export const videosSearch = () => (dispatch, getState) => {
+  const state = getState();
+  const musicBrainzId = state.info.mbid;
+  const source = state.info.relationYoutube;
+
   if (!musicBrainzId || !source) {
     dispatch(videosUpdate());
     return false;
   }
 
-  dispatch(videosPending());
-
   return (async () => {
-    const url = `/api/videos/${musicBrainzId}`;
-
     try {
+      dispatch(videosPending());
+
+      const url = `/api/videos/${musicBrainzId}`;
       const response = await post(url, { source });
       const { data } = response.data;
 
       dispatch(videosUpdate(data));
     } catch (error) {
       logger.error(error);
-    } finally {
+
       dispatch(videosPending());
     }
   })();

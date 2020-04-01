@@ -4,7 +4,6 @@ import { get } from 'axios';
 
 import { biographySearch } from '../biography/biography.actions';
 import { infoUpdate } from '../info/info.actions';
-import { videosSearch } from '../videos/videos.actions';
 import logger from '../../utilities/logger';
 
 export const SEARCH_PENDING = 'SEARCH_PENDING';
@@ -64,11 +63,10 @@ export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
     try {
       const response = await get(url);
       const { data } = response.data;
-      const { wikidata, youtube } = data.relations;
+      const { relationWikidata } = data;
 
       dispatch(infoUpdate(data));
-      dispatch(biographySearch(musicBrainzId, wikidata));
-      dispatch(videosSearch(musicBrainzId, youtube));
+      dispatch(biographySearch(musicBrainzId, relationWikidata));
     } catch (error) {
       logger.error(error);
     } finally {
