@@ -9,6 +9,7 @@ import {
   videosSearch,
   videosUpdate,
 } from '../videos.actions';
+import logger from '../../../utilities/logger';
 
 jest.mock('axios');
 
@@ -79,8 +80,8 @@ describe('videos.actions', () => {
       expect(dispatch).toHaveBeenCalledWith(action);
     });
 
-    it('should call console log if theres an error', async () => {
-      const spy = jest.spyOn(global.console, 'log');
+    it('should call logger if there is an error', async () => {
+      const spy = jest.spyOn(logger, 'error');
       const error = { error: 'An error occurred' };
       post.mockRejectedValue(error);
 

@@ -5,6 +5,7 @@ import { get } from 'axios';
 import { biographySearch } from '../biography/biography.actions';
 import { infoUpdate } from '../info/info.actions';
 import { videosSearch } from '../videos/videos.actions';
+import logger from '../../utilities/logger';
 
 export const SEARCH_PENDING = 'SEARCH_PENDING';
 
@@ -69,9 +70,7 @@ export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
       dispatch(biographySearch(musicBrainzId, wikidata));
       dispatch(videosSearch(musicBrainzId, youtube));
     } catch (error) {
-      // TODO: Add logger
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger.error(error);
     } finally {
       dispatch(searchPending());
     }
@@ -98,9 +97,7 @@ export const searchByArtistName = (artist) => (dispatch) => {
       dispatch(searchResultsMatchesUpdate(matches));
       dispatch(searchByArtistMbid(matches[0].mbid));
     } catch (error) {
-      // TODO: Add logger
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger.error(error);
     } finally {
       dispatch(searchPending());
     }

@@ -1,6 +1,7 @@
 /** @format */
 
 import { post } from 'axios';
+import logger from '../../utilities/logger';
 
 export const VIDEOS_PENDING = 'VIDEOS_PENDING';
 export const VIDEOS_UPDATE = 'VIDEOS_UPDATE';
@@ -46,9 +47,7 @@ export const videosSearch = (musicBrainzId, source) => (dispatch) => {
 
       dispatch(videosUpdate(data));
     } catch (error) {
-      // TODO: Add logger
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger.error(error);
     } finally {
       dispatch(videosPending());
     }

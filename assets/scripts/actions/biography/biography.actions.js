@@ -1,6 +1,7 @@
 /** @format */
 
 import { post } from 'axios';
+import logger from '../../utilities/logger';
 
 export const BIOGRAPHY_PENDING = 'BIOGRAPHY_PENDING';
 export const BIOGRAPHY_UPDATE = 'BIOGRAPHY_UPDATE';
@@ -47,9 +48,7 @@ export const biographySearch = (musicBrainzId, source) => (dispatch) => {
 
       dispatch(biographyUpdate(data));
     } catch (error) {
-      // TODO: Add logger
-      // eslint-disable-next-line no-console
-      console.log(error);
+      logger.error(error);
     }
   })();
 };
