@@ -2,30 +2,28 @@
 
 import deepFreeze from 'deep-freeze';
 
-import info from '../info.reducers';
+import info, { initialState } from '../info.reducers';
 import { INFO_UPDATE } from '../../../actions/info/info.actions';
 import { SEARCH_PENDING } from '../../../actions/search/search.actions';
 
 describe('info.reducers', () => {
-  const initialState = deepFreeze({
+  const state = deepFreeze({
+    ...initialState,
     name: 'Muse',
     mbid: 'fd857293-5ab8-40de-b29e-55a69d4e4d0f',
     genre: 'Alternative Rock',
-    bio: 'Lorem ipsum dolor sit amet.',
   });
 
   it('should return default state', () => {
     const action = { type: SEARCH_PENDING };
     const actual = info(undefined, action);
-    const expected = {};
-    expect(actual).toEqual(expected);
+    expect(actual).toEqual(initialState);
   });
 
   it('should return existing state', () => {
     const action = { type: SEARCH_PENDING };
-    const actual = info(initialState, action);
-    const expected = initialState;
-    expect(actual).toEqual(expected);
+    const actual = info(state, action);
+    expect(actual).toEqual(state);
   });
 
   it('should return new state', () => {
@@ -35,11 +33,17 @@ describe('info.reducers', () => {
         name: 'Foo Fighters',
         mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
         genre: 'Rock',
-        bio: 'Lorem ipsum dolor sit amet.',
+        relationYoutube: 'https://www.youtube.com/user/foofighters',
       },
     };
-    const actual = info(initialState, action);
-    const expected = action.payload;
+    const actual = info(state, action);
+    const expected = {
+      name: 'Foo Fighters',
+      mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
+      genre: 'Rock',
+      relationWikidata: null,
+      relationYoutube: 'https://www.youtube.com/user/foofighters',
+    };
     expect(actual).toEqual(expected);
   });
 
@@ -49,11 +53,16 @@ describe('info.reducers', () => {
       payload: {
         name: 'Foo Fighters',
         mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
-        bio: 'Lorem ipsum dolor sit amet.',
       },
     };
-    const actual = info(initialState, action);
-    const expected = action.payload;
+    const actual = info(state, action);
+    const expected = {
+      name: 'Foo Fighters',
+      mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
+      genre: null,
+      relationWikidata: null,
+      relationYoutube: null,
+    };
     expect(actual).toEqual(expected);
   });
 });

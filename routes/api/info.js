@@ -39,10 +39,8 @@ const info = async (req, res) => {
         name: mbArtist.name,
         mbid: mbArtist.id,
         genre: artistTopGenre,
-        relations: {
-          wikidata: getArtistRelation(mbArtist, 'wikidata'),
-          youtube: getArtistRelation(mbArtist, 'youtube'),
-        },
+        relationWikidata: getArtistRelation(mbArtist, 'wikidata'),
+        relationYoutube: getArtistRelation(mbArtist, 'youtube'),
       },
     });
   } catch (error) {
