@@ -1,0 +1,16 @@
+/* ArtistVideos */
+@import '../../../../stylesheets/config/settings.pcss';
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex: 1 1 auto;
+  flex-flow: row wrap;
+  justify-content: space-between;
+
+  @media(--med) {
+    flex-flow: row nowrap;
+  }
+}
