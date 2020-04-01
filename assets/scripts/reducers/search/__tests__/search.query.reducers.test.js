@@ -2,25 +2,26 @@
 
 import query from '../search.query.reducers';
 
-import {
-  SEARCH_QUERY_UPDATE,
-  SEARCH_RESULTS_MATCHES_UPDATE,
-} from '../../../actions/search/search.actions';
+import { SEARCH_UPDATE } from '../../../actions/search/search.actions';
 
 describe('search.reducers', () => {
   describe('query', () => {
     it('should return default value', () => {
-      const action = { type: SEARCH_RESULTS_MATCHES_UPDATE };
+      const action = { type: 'RANDOM' };
       const actual = query(undefined, action);
-      const expected = '';
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual('');
     });
 
     it('should return new query value', () => {
-      const action = { type: SEARCH_QUERY_UPDATE, payload: 'foo fighters' };
+      const action = {
+        type: SEARCH_UPDATE,
+        payload: {
+          query: 'foo fighters',
+          matches: [{ name: 'Artist1' }, { name: 'Artist2' }],
+        },
+      };
       const actual = query(undefined, action);
-      const expected = action.payload;
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(action.payload.query);
     });
   });
 });

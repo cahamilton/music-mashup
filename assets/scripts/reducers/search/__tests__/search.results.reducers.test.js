@@ -3,61 +3,48 @@
 import { matches, visible } from '../search.results.reducers';
 
 import {
-  SEARCH_PENDING,
-  SEARCH_QUERY_UPDATE,
-  SEARCH_RESULTS_MATCHES_UPDATE,
   SEARCH_RESULTS_VISIBLE_TOGGLE,
+  SEARCH_UPDATE,
 } from '../../../actions/search/search.actions';
 
 describe('search.reducers', () => {
   describe('matches', () => {
     it('should return default value', () => {
-      const action = { type: SEARCH_QUERY_UPDATE };
+      const action = { type: 'RANDOM' };
       const actual = matches(undefined, action);
-      const expected = [];
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual([]);
     });
 
-    it('should return new array of matches', () => {
+    it('should return new value', () => {
       const action = {
-        type: SEARCH_RESULTS_MATCHES_UPDATE,
-        payload: [
-          {
-            name: 'Foo Fighters',
-            mbid: '67f66c07-6e61-4026-ade5-7e782fad3a5d',
-            thumbnail: {
-              '1x': 'image-1x.jpg',
-              '2x': 'image-2x.jpg',
-            },
-          },
-        ],
+        type: SEARCH_UPDATE,
+        payload: {
+          query: 'foo fighters',
+          matches: [{ name: 'Artist1' }, { name: 'Artist2' }],
+        },
       };
       const actual = matches(undefined, action);
-      const expected = action.payload;
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(action.payload.matches);
     });
   });
 
   describe('visible', () => {
     it('should return default value', () => {
-      const action = { type: SEARCH_PENDING };
-      const expected = false;
+      const action = { type: 'RANDOM' };
       const actual = visible(undefined, action);
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(false);
     });
 
     it('should return negated default value', () => {
       const action = { type: SEARCH_RESULTS_VISIBLE_TOGGLE };
-      const expected = true;
       const actual = visible(undefined, action);
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(true);
     });
 
     it('should return return false', () => {
-      const action = { type: SEARCH_QUERY_UPDATE };
-      const expected = false;
+      const action = { type: SEARCH_UPDATE };
       const actual = visible(undefined, action);
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(false);
     });
   });
 });

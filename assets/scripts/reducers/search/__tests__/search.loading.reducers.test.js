@@ -2,25 +2,27 @@
 
 import loading from '../search.loading.reducers';
 
-import {
-  SEARCH_PENDING,
-  SEARCH_QUERY_UPDATE,
-} from '../../../actions/search/search.actions';
+import { SEARCH_PENDING } from '../../../actions/search/search.actions';
+import { INFO_UPDATE } from '../../../actions/info/info.actions';
 
 describe('search.reducers', () => {
   describe('loading', () => {
     it('should return default value', () => {
-      const action = { type: SEARCH_QUERY_UPDATE };
+      const action = { type: 'RANDOM' };
       const actual = loading(undefined, action);
-      const expected = false;
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(false);
     });
 
     it('should return negated default value', () => {
       const action = { type: SEARCH_PENDING };
       const actual = loading(undefined, action);
-      const expected = true;
-      expect(actual).toEqual(expected);
+      expect(actual).toEqual(true);
+    });
+
+    it('should return false', () => {
+      const action = { type: INFO_UPDATE };
+      const actual = loading(true, action);
+      expect(actual).toEqual(false);
     });
   });
 });

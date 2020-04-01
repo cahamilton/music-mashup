@@ -1,13 +1,13 @@
 /** @format */
 
-import { SEARCH_QUERY_UPDATE } from '../../actions/search/search.actions';
+import { SEARCH_UPDATE } from '../../actions/search/search.actions';
 
 const query = (state = '', action) => {
   const { type, payload } = action;
 
   switch (type) {
-    case SEARCH_QUERY_UPDATE:
-      return payload;
+    case SEARCH_UPDATE:
+      return payload.query;
     default:
       return state;
   }

@@ -2,13 +2,11 @@
 
 import {
   SEARCH_PENDING,
-  SEARCH_QUERY_UPDATE,
-  SEARCH_RESULTS_MATCHES_UPDATE,
   SEARCH_RESULTS_VISIBLE_TOGGLE,
+  SEARCH_UPDATE,
   searchPending,
-  searchQueryUpdate,
-  searchResultsMatchesUpdate,
   searchResultsVisibleToggle,
+  searchUpdate,
 } from '../search.actions';
 
 describe('search.actions', () => {
@@ -17,17 +15,10 @@ describe('search.actions', () => {
     expect(action).toEqual({ type: SEARCH_PENDING });
   });
 
-  test('searchQueryUpdate', () => {
-    const action = searchQueryUpdate('muse');
-    expect(action).toEqual({ type: SEARCH_QUERY_UPDATE, payload: 'muse' });
-  });
-
-  test('searchResultsMatchesUpdate', () => {
-    const action = searchResultsMatchesUpdate(['Muse', 'Foo Fighters']);
-    expect(action).toEqual({
-      type: SEARCH_RESULTS_MATCHES_UPDATE,
-      payload: ['Muse', 'Foo Fighters'],
-    });
+  test('searchQuery', () => {
+    const data = { query: 'muse', matches: [] };
+    const action = searchUpdate(data);
+    expect(action).toEqual({ type: SEARCH_UPDATE, payload: data });
   });
 
   test('searchResultsVisibleToggle', () => {

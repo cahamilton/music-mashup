@@ -7,10 +7,8 @@ import { infoUpdate } from '../info/info.actions';
 import logger from '../../utilities/logger';
 
 export const SEARCH_PENDING = 'SEARCH_PENDING';
+export const SEARCH_UPDATE = 'SEARCH_UPDATE';
 
-export const SEARCH_QUERY_UPDATE = 'SEARCH_QUERY_UPDATE';
-
-export const SEARCH_RESULTS_MATCHES_UPDATE = 'SEARCH_RESULTS_MATCHES_UPDATE';
 export const SEARCH_RESULTS_VISIBLE_TOGGLE = 'SEARCH_RESULTS_VISIBLE_TOGGLE';
 
 /**
@@ -22,22 +20,12 @@ export const searchPending = () => ({
 });
 
 /**
- * Update search query
- * @param payload {String} - Artist name
- * @returns {{type: string, payload: string}}
+ * Update search results
+ * @param {Object} payload
+ * @returns {{type: string, payload: object}}
  */
-export const searchQueryUpdate = (payload) => ({
-  type: SEARCH_QUERY_UPDATE,
-  payload,
-});
-
-/**
- * Update search result matches
- * @param payload {Array} - An array of Search result matches
- * @returns {{type: string, payload: array}}
- */
-export const searchResultsMatchesUpdate = (payload) => ({
-  type: SEARCH_RESULTS_MATCHES_UPDATE,
+export const searchUpdate = (payload) => ({
+  type: SEARCH_UPDATE,
   payload,
 });
 
@@ -55,12 +43,9 @@ export const searchResultsVisibleToggle = () => ({
  * @return {function(*): Promise<void>}
  */
 export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
-  dispatch(searchPending());
-
   return (async () => {
-    const url = `/api/info/${musicBrainzId}`;
-
     try {
+      const url = `/api/info/${musicBrainzId}`;
       const response = await get(url);
       const { data } = response.data;
       const { relationWikidata } = data;
@@ -69,7 +54,7 @@ export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
       dispatch(biographySearch(musicBrainzId, relationWikidata));
     } catch (error) {
       logger.error(error);
-    } finally {
+
       dispatch(searchPending());
     }
   })();
@@ -81,22 +66,19 @@ export const searchByArtistMbid = (musicBrainzId) => (dispatch) => {
  * @returns {function(*): Promise<void>}
  */
 export const searchByArtistName = (artist) => (dispatch) => {
-  dispatch(searchPending());
-
   return (async () => {
-    const url = `/api/search/${encodeURIComponent(artist)}`;
-
     try {
+      dispatch(searchPending());
+
+      const url = `/api/search/${encodeURIComponent(artist)}`;
       const response = await get(url);
       const { data } = response.data;
-      const { query, matches } = data;
 
-      dispatch(searchQueryUpdate(query));
-      dispatch(searchResultsMatchesUpdate(matches));
-      dispatch(searchByArtistMbid(matches[0].mbid));
+      dispatch(searchUpdate(data));
+      dispatch(searchByArtistMbid(data.matches[0].mbid));
     } catch (error) {
       logger.error(error);
-    } finally {
+
       dispatch(searchPending());
     }
   })();
