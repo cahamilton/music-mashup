@@ -89,7 +89,7 @@
     "eslint-plugin-react-hooks": "^2.5.1",
     "husky": "^4.2.3",
     "jest-watch-typeahead": "^0.4.2",
-    "lint-staged": "^10.1.0",
+    "lint-staged": "^10.1.2",
     "nodemon": "^2.0.2",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
