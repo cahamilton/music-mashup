@@ -29,7 +29,9 @@ const ArtistVideo = ({ id, title, thumbnail }) => {
             className={styles.image}
           />
         </div>
-        <span className={styles.title}>{title}</span>
+        <span className={styles.title}>
+          <div>{title}</div>
+        </span>
       </a>
     </li>
   );
