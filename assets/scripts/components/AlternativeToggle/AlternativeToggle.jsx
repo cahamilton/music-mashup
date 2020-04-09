@@ -16,7 +16,7 @@ const AlternativeToggle = (props) => {
     <div className={styles.container}>
       <small>
         <strong>
-          Not what you were looking for?{' '}
+          {`Not what you were looking for? `}
           <button
             className={`link ${styles.button}`}
             onClick={onClick}
