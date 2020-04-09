@@ -4,7 +4,7 @@ const axios = require('axios');
 
 const getFormattedResponse = require('../images/getFormattedResponse');
 const images = require('../images');
-const logger = require('../../../logger');
+const logger = require('../../../utilities/logger');
 
 jest.mock('axios');
 jest.mock('../images/getFormattedResponse', () => jest.fn());

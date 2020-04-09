@@ -6,7 +6,7 @@ const biography = require('../biography');
 const getFormattedResults = require('../biography/getFormattedResults');
 const getWikidataId = require('../biography/getWikidataId');
 const getWikipediaTitle = require('../biography/getWikipediaTitle');
-const logger = require('../../../logger');
+const logger = require('../../../utilities/logger');
 const mockWikipedia = require('../biography/__mocks__/responses/responseWikipedia');
 
 jest.mock('axios');

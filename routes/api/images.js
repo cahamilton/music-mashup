@@ -4,7 +4,7 @@ const { get } = require('axios');
 
 const getFormattedResponse = require('./images/getFormattedResponse');
 const isProduction = require('../../helpers/isProduction');
-const logger = require('../../logger');
+const logger = require('../../utilities/logger');
 
 const images = async (req, res) => {
   const { musicBrainzID } = req.params;

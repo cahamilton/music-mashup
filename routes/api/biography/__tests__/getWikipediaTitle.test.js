@@ -2,7 +2,7 @@
 
 const axios = require('axios');
 const getWikipediaTitle = require('../getWikipediaTitle');
-const logger = require('../../../../logger');
+const logger = require('../../../../utilities/logger');
 const response = require('../__mocks__/responses/responseWikipediaTitle');
 
 jest.mock('axios');

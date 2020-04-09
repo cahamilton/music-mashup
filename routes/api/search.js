@@ -6,7 +6,7 @@ const { MusicBrainzApi } = require('musicbrainz-api');
 const getFilteredResults = require('./search/getFilteredResults');
 const getFormattedResults = require('./search/getFormattedResults');
 const isProduction = require('../../helpers/isProduction');
-const logger = require('../../logger');
+const logger = require('../../utilities/logger');
 const musicBrainzConfig = require('./config/musicBrainz');
 
 const search = async (req, res) => {

@@ -4,7 +4,7 @@ const axios = require('axios');
 const cloneDeep = require('clone-deep');
 
 const getYouTubePlaylistId = require('../getYouTubePlaylistId');
-const logger = require('../../../../logger');
+const logger = require('../../../../utilities/logger');
 const mock = require('../__mocks__/getYouTubePlaylistId');
 
 jest.mock('axios');

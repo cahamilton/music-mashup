@@ -7,7 +7,7 @@ const getFormattedResults = require('./biography/getFormattedResults');
 const getWikidataId = require('./biography/getWikidataId');
 const getWikipediaTitle = require('./biography/getWikipediaTitle');
 const isProduction = require('../../helpers/isProduction');
-const logger = require('../../logger');
+const logger = require('../../utilities/logger');
 
 const biography = async (req, res) => {
   const { musicBrainzID } = req.params;

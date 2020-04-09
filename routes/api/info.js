@@ -6,7 +6,7 @@ const { MusicBrainzApi } = require('musicbrainz-api');
 const getArtistRelation = require('./info/getArtistRelation');
 const getArtistTopGenre = require('./info/getArtistTopGenre');
 const isProduction = require('../../helpers/isProduction');
-const logger = require('../../logger');
+const logger = require('../../utilities/logger');
 const musicBrainzConfig = require('./config/musicBrainz');
 
 const info = async (req, res) => {

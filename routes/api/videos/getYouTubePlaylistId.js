@@ -2,7 +2,7 @@
 
 const { get } = require('axios');
 
-const logger = require('../../../logger');
+const logger = require('../../../utilities/logger');
 
 /**
  * Get YouTube upload playlist
