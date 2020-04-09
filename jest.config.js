@@ -18,6 +18,7 @@ module.exports = {
   "setupFilesAfterEnv": [
     "<rootDir>/enzyme.config.js"
   ],
+  "silent": true,
   "transform": {
     "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
   },
