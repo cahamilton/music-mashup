@@ -4,10 +4,10 @@ import React from 'react';
 
 import styles from './Main.pcss';
 
-import Alternative from './Alternative/container/Alternative';
-import ArtistBiography from './Artist/container/ArtistBiography';
-import ArtistHeader from './Artist/container/ArtistHeader';
-import ArtistVideos from './Artist/container/ArtistVideos';
+import Alternative from '../Alternative/container/Alternative';
+import ArtistBiography from '../ArtistBiography/container/ArtistBiography';
+import ArtistHeader from '../ArtistHeader/container/ArtistHeader';
+import ArtistVideos from '../ArtistVideos/container/ArtistVideos';
 
 const Main = () => (
   <main className={styles.container} role="main">

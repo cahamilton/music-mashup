@@ -1,0 +1,30 @@
+/* Alternative */
+@import '../../../stylesheets/config/settings.pcss';
+
+.container {
+  position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+  margin: 0 0 2rem;
+}
+
+.list {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0;
+  padding: 0;
+  background: var(--color--primary);
+}
+
+.item {
+  display: inline-flex;
+  flex: 0 0 50%;
+  border: 0.2em solid var(--color--primary);
+
+  @media (--med) {
+    flex: 0 1 25%;
+  }
+}
