@@ -5,6 +5,8 @@ node_js:
   - lts/*
 
 script:
+  - "yarn run lint:js"
+  - "yarn run lint:styles"
   - "yarn run test"
   - "yarn run coverage"
   - "yarn run webpack"
