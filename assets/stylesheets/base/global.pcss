@@ -2,8 +2,8 @@
 @import '../config/settings.pcss';
 
 *,
-*:before,
-*:after {
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -31,6 +31,17 @@ img {
   -ms-interpolation-mode: bicubic;
 }
 
+textarea {
+  height: auto;
+  min-height: 50px;
+  border-radius: 0;
+}
+
+select {
+  width: 100%;
+  border-radius: 0;
+}
+
 input[type="text"],
 textarea,
 select {
@@ -50,31 +61,17 @@ select {
     &::placeholder {
       color: var(--color--secondary);
     }
-
   }
 }
 
-input {}
-
-textarea {
-  height: auto;
-  min-height: 50px;
-  border-radius: 0;
-}
-
-select {
-  width: 100%;
-  border-radius: 0;
-}
-
 button {
-  appearance: none;
-  background: transparent;
   padding: 0;
   border: 0;
   border-radius: 0.25rem;
+  background: transparent;
   line-height: 1;
   cursor: pointer;
+  appearance: none;
 
   &[disabled] {
     cursor: not-allowed;
@@ -82,9 +79,9 @@ button {
 }
 
 p {
+  margin: 0 0 1rem;
   font-size: inherit;
   line-height: 1.5;
-  margin: 0 0 1rem;
   text-rendering: optimizeLegibility;
 }
 
@@ -111,14 +108,14 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-  font-weight: 700;
-  font-style: normal;
-  color: var(--color--primary);
-  text-rendering: optimizeLegibility;
   margin: 0 0 0.5rem;
-  line-height: 1.4;
+  color: var(--color--primary);
+  font-family: "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
+  font-style: normal;
+  font-weight: 700;
   letter-spacing: -0.05rem;
+  line-height: 1.4;
+  text-rendering: optimizeLegibility;
 }
 
 h1 {
@@ -169,18 +166,26 @@ h6 {
   }
 }
 
+/* div */
+:global(.container) {
+  position: relative;
+  max-width: 1000px;
+  margin: auto;
+  padding: 0 1rem;
+}
+
 a,
 :global(.link) {
-  color: var(--color--primary);
-  text-decoration: none;
-  line-height: inherit;
-  cursor: pointer;
   border-bottom: 1px dotted var(--color--primary);
+  color: var(--color--primary);
+  line-height: inherit;
+  text-decoration: none;
+  cursor: pointer;
 
   &:hover,
   &:focus {
-    color: var(--color--tertiary);
     border-bottom: 0;
+    color: var(--color--tertiary);
   }
 
   &:active {
@@ -194,14 +199,14 @@ a,
 
 ul,
 ol {
-  line-height: 1.6;
   margin-bottom: 1rem;
   list-style-position: outside;
+  line-height: 1.6;
 }
 
 ul {
-  list-style-type: disc;
   margin-left: 1.25rem;
+  list-style-type: disc;
 }
 
 ol {
@@ -216,15 +221,7 @@ ul ul,
 ol ul,
 ul ol,
 ol ol {
-  margin-left: 1.25rem;
   margin-bottom: 0;
+  margin-left: 1.25rem;
   list-style-type: inherit;
-}
-
-/* div */
-:global(.container) {
-  max-width: 1000px;
-  margin: auto;
-  position: relative;
-  padding: 0 1rem;
 }

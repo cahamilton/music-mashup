@@ -5,14 +5,14 @@
   display: inline-flex;
   flex: 1 1 auto;
   align-items: center;
+  padding: 0.75rem;
   border: 0;
   border-radius: 0;
-  text-align: left;
+  background: var(--color--primary);
   color: var(--color--secondary);
   font-size: 0.85rem;
-  padding: 0.75rem;
-  background: var(--color--primary);
   line-height: inherit;
+  text-align: left;
 
   &:active {
     background: var(--color--primary);
@@ -26,16 +26,16 @@
   }
 
   @media (--med) {
-    font-size: 0.75rem;
     padding: 0.85rem;
+    font-size: 0.75rem;
   }
 }
 
 .image {
   flex: 0 0 auto;
-  margin-right: 0.85rem;
   width: 32px;
   height: 32px;
+  margin-right: 0.85rem;
 
   @media (--med) {
     margin-right: 0.75rem;
@@ -44,12 +44,6 @@
 
 .info {
   display: flex;
-  flex-flow: column;
   flex: 1 1 auto;
+  flex-flow: column;
 }
-
-.name {}
-
-.disambiguation {}
-
-

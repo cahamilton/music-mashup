@@ -2,25 +2,23 @@
 @import '../../../../stylesheets/config/settings.pcss';
 
 .item {
-  min-width: 0;
   flex: 0 0 calc(50% - 0.5rem);
+  min-width: 0;
   margin: 0 0 1rem;
 
-  @media(--med) {
+  @media (--med) {
     flex: 1 1 100%;
     margin: 0 0.5rem 1rem;
   }
 
   &:first-of-type {
-
-    @media(--med) {
+    @media (--med) {
       margin-left: 0;
     }
   }
 
   &:last-of-type {
-
-    @media(--med) {
+    @media (--med) {
       margin-right: 0;
     }
   }
@@ -28,11 +26,11 @@
 
 .title {
   display: block;
-  text-align: center;
+  margin-top: 0.5rem;
   font-size: 0.75rem;
   font-weight: 700;
-  margin-top: 0.5rem;
   line-height: 1;
+  text-align: center;
 
   & > div {
     overflow: hidden;
@@ -42,10 +40,10 @@
 }
 
 .thumbnail {
-  height: 0;
-  overflow: hidden;
   position: relative;
+  height: 0;
   padding-top: calc((480 / 640) * 100%);
+  overflow: hidden;
   background: var(--color--primary);
 }
 

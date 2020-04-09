@@ -3,14 +3,14 @@
 
 .container {
   position: absolute;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   background: color-mod(var(--color--secondary) alpha(75%));
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  z-index: 100;
 }
 
 .icon {
@@ -21,31 +21,31 @@
 }
 
 .bars {
-  align-items: flex-end;
   display: flex;
+  align-items: flex-end;
   width: 1.25em;
   height: 1em;
-  overflow: hidden;
   margin: 0 auto -0.25em auto;
+  overflow: hidden;
 }
 
 .column {
-  flex: 1;
   position: relative;
+  flex: 1;
   height: 100%;
   margin-right: 0.0625em;
 }
 
 .bar {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  transform: translateY(100%);
   animation-name: loading;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate;
   background-color: var(--color-loading);
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  transform: translateY(100%);
   will-change: transform;
 }
 
@@ -93,14 +93,15 @@
   color: var(--color-loading);
   font-size: 0.75em;
   font-weight: 600;
-  line-height: 1;
   letter-spacing: -0.05em;
+  line-height: 1;
 }
 
 @keyframes loading {
   0% {
     transform: translateY(100%);
   }
+
   100% {
     transform: translateY(0);
   }
