@@ -10,7 +10,7 @@ describe('reducers', () => {
   it('should contain a key for each child reducer', () => {
     const state = store.getState();
     const stateKeys = Object.keys(state);
-    const reducers = ['biography', 'info', 'search', 'videos'];
+    const reducers = ['biography', 'images', 'info', 'search', 'videos'];
 
     expect(stateKeys).toHaveLength(reducers.length);
     expect(stateKeys).toEqual(expect.arrayContaining(reducers));
