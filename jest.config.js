@@ -2,10 +2,10 @@ module.exports = {
   "cacheDirectory": "/tmp/jest/",
   "collectCoverage": true,
   "collectCoverageFrom": [
-    "**/assets/**/*.{js,jsx}",
-    "**/helpers/**/*.{js,jsx}",
-    "**/routes/**/*.{js,jsx}",
-    "**/utilities/**/*.{js,jsx}",
+    "**/assets/**/*.{js,jsx,ts,tsx}",
+    "**/helpers/**/*.{js,jsx,ts,tsx}",
+    "**/routes/**/*.{js,jsx,ts,tsx}",
+    "**/utilities/**/*.{js,jsx,ts,tsx}",
     "!**/container/**",
     "!**/coverage/**",
     "!**/public/**"
@@ -20,7 +20,7 @@ module.exports = {
   ],
   "silent": true,
   "transform": {
-    "^.+\\.(js|jsx|mjs)$": "<rootDir>/node_modules/babel-jest"
+    "^.+\\.(js|jsx|mjs|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
   },
   "moduleNameMapper": {
     "\\.(css|pcss|scss|less)$": "identity-obj-proxy",

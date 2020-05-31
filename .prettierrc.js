@@ -12,7 +12,7 @@ module.exports = {
   bracketSpacing: true,
   jsxBracketSameLine: false,
   arrowParens: 'always',
-  parser: 'babel',
+  parser: 'babel-ts',
   requirePragma: false,
   insertPragma: true,
   endOfLine: 'lf',
