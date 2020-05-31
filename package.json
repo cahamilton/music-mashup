@@ -9,7 +9,7 @@
   "scripts": {
     "dev": "nodemon ./bin/www",
     "start": "node ./bin/www",
-    "lint:js": "eslint . --ext .js --ext .jsx",
+    "lint:js": "eslint . --ext .js,.jsx,.ts,.tsx",
     "lint:styles": "stylelint **/*.{css,pcss}",
     "test": "jest",
     "coverage": "coveralls < coverage/lcov.info",
@@ -32,6 +32,7 @@
     "@babel/core": "^7.9.0",
     "@babel/preset-env": "^7.9.5",
     "@babel/preset-react": "^7.9.4",
+    "@babel/preset-typescript": "^7.9.0",
     "axios": "^0.19.2",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^25.4.0",
@@ -78,11 +79,15 @@
     "winston": "^3.2.1"
   },
   "devDependencies": {
+    "@types/deep-freeze": "^0.1.2",
+    "@types/jest": "^25.2.3",
+    "@typescript-eslint/eslint-plugin": "^2.34.0",
+    "@typescript-eslint/parser": "^2.34.0",
     "clone-deep": "^4.0.1",
     "coveralls": "3.0.9",
     "deep-freeze": "^0.0.1",
     "eslint": "^6.8.0",
-    "eslint-config-airbnb": "^18.1.0",
+    "eslint-config-airbnb-typescript": "^7.2.1",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -96,6 +101,8 @@
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-property-sort-order-smacss": "^6.0.0",
     "stylelint-config-standard": "^20.0.0",
+    "ts-loader": "^7.0.4",
+    "typescript": "^3.9.3",
     "webpack-cli": "^3.3.11",
     "webpack-dev-server": "^3.10.3"
   },
