@@ -9,12 +9,15 @@
 
   <title><%= title %></title>
 
-  <link rel="stylesheet" href="<%= asset.basePath %>stylesheets/mashup.css">
-  <link rel="apple-touch-icon" href="<%= asset.basePath %>apple-touch-icon.png">
+  <link rel="stylesheet" href="<%= getAssetPath('vendor.css') %>">
+  <link rel="stylesheet" href="<%= getAssetPath('mashup.css') %>">
+  <link rel="apple-touch-icon" href="<%= getAssetPath('apple-touch-icon.png') %>">
 </head>
 
 <body>
   <div id="musicMashup"></div>
-  <script type="text/javascript" src="<%= asset.basePath %>scripts/mashup.js"></script>
+  <script type="text/javascript" src="<%= getAssetPath('runtime.js') %>"></script>
+  <script type="text/javascript" src="<%= getAssetPath('vendor.js') %>"></script>
+  <script type="text/javascript" src="<%= getAssetPath('mashup.js') %>"></script>
 </body>
 </html>

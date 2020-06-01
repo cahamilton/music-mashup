@@ -3,19 +3,31 @@
 const path = require('path');
 const webpack = require('webpack');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const isProduction = require('./helpers/isProduction');
 
 module.exports = {
+  mode: isProduction //
+    ? 'production'
+    : 'development',
   context: path.join(__dirname, '/assets/'),
+  devtool: isProduction //
+    ? 'cheap-source-map'
+    : 'source-map',
   entry: {
     mashup: ['./scripts/index'],
   },
   output: {
-    path: path.join(__dirname, '/public/'),
-    publicPath: isProduction ? '/' : 'http://localhost:8080/',
-    filename: './scripts/[name].js',
-    chunkFilename: './scripts/[name].[chunkhash].js',
+    path: path.join(__dirname, '/public'),
+    publicPath: '',
+    filename: !isProduction //
+      ? 'scripts/[name].js'
+      : 'scripts/[name].[chunkhash].js',
+    chunkFilename: !isProduction //
+      ? 'scripts/[name].js'
+      : 'scripts/[name].[chunkhash].js',
   },
   devServer: {
     compress: true,
@@ -70,20 +82,46 @@ module.exports = {
     ],
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
+    new ManifestPlugin({
+      fileName: path.join(__dirname, 'rev-manifest.json'),
+      writeToFileEmit: !isProduction,
+    }),
     new webpack.SourceMapDevToolPlugin({
       filename: '[file].map',
-      exclude: './scripts/mashup.js',
+      exclude: 'scripts/mashup.js',
     }),
     new MiniCssExtractPlugin({
-      filename: isProduction
-        ? './stylesheets/[name].[hash].css'
-        : './stylesheets/[name].css',
-      chunkFilename: isProduction
-        ? './stylesheets/[id].[hash].css'
-        : './stylesheets/[id].css',
+      filename: !isProduction
+        ? 'stylesheets/[name].css'
+        : 'stylesheets/[name].[chunkhash].css',
+      chunkFilename: !isProduction
+        ? 'stylesheets/[name].css'
+        : 'stylesheets/[name].[chunkhash].css',
     }),
   ],
+  optimization: {
+    minimize: isProduction,
+    minimizer: [
+      new TerserPlugin({
+        cache: true, //
+        parallel: true,
+        sourceMap: true,
+      }),
+    ],
+    splitChunks: {
+      minSize: 10000,
+      cacheGroups: {
+        vendor: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'vendor',
+          chunks: 'all',
+        },
+      },
+    },
+    runtimeChunk: {
+      name: 'runtime',
+    },
+  },
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
