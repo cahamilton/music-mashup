@@ -1,14 +1,13 @@
 /** @format */
 
-const path = require('path');
-const webpack = require('webpack');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const ManifestPlugin = require('webpack-manifest-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
+import path from 'path';
+import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import ManifestPlugin from 'webpack-manifest-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+import isProduction from './helpers/isProduction';
 
-const isProduction = require('./helpers/isProduction');
-
-module.exports = {
+const config: webpack.Configuration = {
   mode: isProduction //
     ? 'production'
     : 'development',
@@ -129,3 +128,5 @@ module.exports = {
     hints: 'warning',
   },
 };
+
+export default config;
