@@ -78,7 +78,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.42.1",
     "webpack-manifest-plugin": "^2.2.0",
-    "winston": "^3.2.1"
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@types/deep-freeze": "^0.1.2",
