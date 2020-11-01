@@ -104,7 +104,7 @@
     "husky": "^4.2.5",
     "jest-watch-typeahead": "^0.5.0",
     "lint-staged": "^10.4.0",
-    "nodemon": "^2.0.3",
+    "nodemon": "^2.0.6",
     "stylelint": "^13.6.1",
     "stylelint-config-css-modules": "^2.2.0",
     "stylelint-config-property-sort-order-smacss": "^6.0.0",
