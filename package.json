@@ -50,7 +50,7 @@
     "enzyme-adapter-react-16": "^1.15.5",
     "express": "^4.15.3",
     "file-loader": "^6.1.0",
-    "http-status-codes": "^1.4.0",
+    "http-status-codes": "^2.1.4",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^25.4.0",
     "lastfm": "^0.9.2",
