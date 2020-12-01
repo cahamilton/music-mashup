@@ -28,7 +28,7 @@
     "mashup"
   ],
   "dependencies": {
-    "@babel/cli": "^7.8.4",
+    "@babel/cli": "^7.12.8",
     "@babel/core": "^7.10.4",
     "@babel/preset-env": "^7.11.5",
     "@babel/preset-react": "^7.10.4",
