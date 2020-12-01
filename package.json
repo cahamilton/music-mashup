@@ -37,7 +37,7 @@
     "axios": "^0.21.0",
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.3.0",
-    "babel-loader": "^8.1.0",
+    "babel-loader": "^8.2.2",
     "body-parser": "^1.17.2",
     "classnames": "^2.2.6",
     "cookie-parser": "^1.4.3",
