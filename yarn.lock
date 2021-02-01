@@ -1633,11 +1633,12 @@
     "@types/serve-static" "*"
     "@types/webpack" "*"
 
-"@types/webpack-manifest-plugin@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@types/webpack-manifest-plugin/-/webpack-manifest-plugin-2.1.0.tgz#1fc52fc795d165493ab957656a7aa9f5cb7c145e"
-  integrity sha512-6OROnT+O0nht7QAr1juVZLm5E8V92LU7EDLyoEVFDUdRE67lU9c9fpPjrVVN+QXPYeaBP7ZzbQI8A4LEUtv8rg==
+"@types/webpack-manifest-plugin@^3.0.3":
+  version "3.0.3"
+  resolved "https://registry.yarnpkg.com/@types/webpack-manifest-plugin/-/webpack-manifest-plugin-3.0.3.tgz#0c07a5479d0c7e5d71a676692ca57f9ac1c1f32c"
+  integrity sha512-B8qDy9qwA0+rODTV3eQrTt99j2lc1crc25hP+9PuKRJUe40K4F3PG+avoQXxv2HV1VVLOle6SR3CKnwXgEktsQ==
   dependencies:
+    "@types/tapable" "*"
     "@types/webpack" "*"
 
 "@types/webpack-sources@*":

@@ -89,7 +89,7 @@
     "@types/terser-webpack-plugin": "^3.0.0",
     "@types/webpack": "^4.41.25",
     "@types/webpack-dev-server": "^3.11.0",
-    "@types/webpack-manifest-plugin": "^2.1.0",
+    "@types/webpack-manifest-plugin": "^3.0.3",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
     "clone-deep": "^4.0.1",
