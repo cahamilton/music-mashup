@@ -27,7 +27,7 @@ jobs:
         yarn run lint:styles
 
     - name: Test
-      run: yarn run test --collect
+      run: yarn run test --coverage
 
     - name: Coveralls
       uses: coverallsapp/github-action@master
