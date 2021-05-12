@@ -1,0 +1,54 @@
+name: Build
+
+on:
+  push:
+    branches: [develop]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+
+    - name: Install
+      run: yarn install --frozen-lockfile
+
+    - name: Lint
+      run: |
+        yarn run lint:js
+        yarn run lint:styles
+
+    - name: Test
+      run: yarn run test --collect
+
+    - name: Coveralls
+      uses: coverallsapp/github-action@master
+      with:
+        github-token: ${{ secrets.github_token }}
+        path-to-lcov: ./coverage/lcov.info
+
+  compile:
+    name: Compile
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Node
+      uses: actions/setup-node@v2
+
+    - name: Install
+      run: yarn install --frozen-lockfile
+
+    - name: Webpack
+      run: yarn run webpack
