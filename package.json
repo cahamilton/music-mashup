@@ -47,7 +47,7 @@
     "dotenv": "^8.2.0",
     "ejs": "^3.1.5",
     "enzyme": "^3.11.0",
-    "enzyme-adapter-react-16": "^1.15.5",
+    "enzyme-adapter-react-16": "^1.15.6",
     "express": "^4.15.3",
     "file-loader": "^6.1.0",
     "http-status-codes": "^2.1.4",
