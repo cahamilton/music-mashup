@@ -108,7 +108,7 @@
     "nodemon": "^2.0.6",
     "stylelint": "^13.8.0",
     "ts-loader": "^7.0.5",
-    "ts-node": "^8.10.2",
+    "ts-node": "^10.4.0",
     "typescript": "^3.9.3",
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^3.10.3"
